@@ -30,7 +30,7 @@ namespace StudentInformationSystem.Data
                 .HasForeignKey(s => s.SpecialtyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            builder.Entity<Teacher>().HasMany(t => t.Courses).WithOne(c => c.Teacher).HasForeignKey(c => c.TeacherId).OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

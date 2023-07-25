@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using static StudentInformationSystem.Common.DataValidationConstants;
 
 namespace StudentInformationSystem.Data.Models
@@ -28,6 +29,11 @@ namespace StudentInformationSystem.Data.Models
         [StringLength(TeacherConstants.PhoneNumberMaxLength, MinimumLength = TeacherConstants.PhoneNumberMinLength)]
 
         public string PhoneNumber { get; set; } = null!;
+
+        [Required]
+        public string UserId { get; set; } = null!;
+
+        public virtual IdentityUser User { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
     }
