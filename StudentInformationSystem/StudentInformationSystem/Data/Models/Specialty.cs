@@ -10,6 +10,7 @@ namespace StudentInformationSystem.Data.Models
         public Specialty()
         {
             this.Students = new HashSet<Student>();
+            this.Courses = new HashSet<Course>();
         }
 
         [Key]
@@ -24,6 +25,8 @@ namespace StudentInformationSystem.Data.Models
         public int FacultyId { get; set; }
 
         public Faculty Faculty { get; set; } = null!;
+
+        public virtual ICollection<Course> Courses { get; set; } 
 
         public virtual ICollection<Student> Students { get; set; }
     }

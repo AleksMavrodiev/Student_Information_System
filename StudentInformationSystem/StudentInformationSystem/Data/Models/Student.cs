@@ -9,7 +9,7 @@ namespace StudentInformationSystem.Data.Models
         public Student()
         {
             this.Id = Guid.NewGuid();
-            this.Courses = new HashSet<Course>();
+            this.StudentCourses = new HashSet<StudentCourses>();
         }
 
         [Key]
@@ -28,7 +28,7 @@ namespace StudentInformationSystem.Data.Models
         public string EGN { get; set; } = null!;
 
         [Required]
-        [StringLength(StudentConstants.EmailMaxLength, MinimumLength = StudentConstants.EmailMinLength)]]
+        [StringLength(StudentConstants.EmailMaxLength, MinimumLength = StudentConstants.EmailMinLength)]
         public string Email { get; set; } = null!;
 
         [Required]
@@ -51,7 +51,7 @@ namespace StudentInformationSystem.Data.Models
 
         public Specialty Specialty { get; set; } = null!;
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<StudentCourses> StudentCourses { get; set; }
 
     }
 }
