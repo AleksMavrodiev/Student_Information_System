@@ -28,8 +28,8 @@ namespace StudentInformationSystem.Data.Models
         public int Credits { get; set; }
 
         public int LectureRoom { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public TimeOnly Start { get; set; }
+        public TimeOnly End { get; set; }
 
         [Required]
         [ForeignKey(nameof(Teacher))]

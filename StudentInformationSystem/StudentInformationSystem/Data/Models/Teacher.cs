@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using static StudentInformationSystem.Common.DataValidationConstants;
 
@@ -31,6 +32,7 @@ namespace StudentInformationSystem.Data.Models
         public string PhoneNumber { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
 
         public virtual IdentityUser User { get; set; }

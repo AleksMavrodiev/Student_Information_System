@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data.Configurations;
 using StudentInformationSystem.Data.Models;
 
 namespace StudentInformationSystem.Data
@@ -24,13 +25,13 @@ namespace StudentInformationSystem.Data
         {
             builder.Entity<StudentCourses>().HasKey(sc => new { sc.StudentId, sc.CourseId });
 
-            builder.Entity<Student>()
-                .HasOne(s => s.Specialty)
-                .WithMany(s => s.Students)
-                .HasForeignKey(s => s.SpecialtyId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Teacher>().HasMany(t => t.Courses).WithOne(c => c.Teacher).HasForeignKey(c => c.TeacherId).OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UniversityEntityConfiguration());
+            builder.ApplyConfiguration(new FacultyEntityConfiguration());
+            builder.ApplyConfiguration(new SpecialtyEntityConfiguration());
+            builder.ApplyConfiguration(new TeacherEntityConfiguration());
+            builder.ApplyConfiguration(new CourseEntityConfiguration());
+            builder.ApplyConfiguration(new StudentEntityConfiguration());
 
             base.OnModelCreating(builder);
         }

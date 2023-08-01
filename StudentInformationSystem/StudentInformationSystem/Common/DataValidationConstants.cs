@@ -44,7 +44,7 @@
             public const int NameMinLength = 10;
             public const int NameMaxLength = 50;
             public const int DescriptionMinLength = 10;
-            public const int DescriptionMaxLength = 200;
+            public const int DescriptionMaxLength = 1000;
             public const int CreditsMinValue = 1;
             public const int CreditsMaxValue = 20;
         }
