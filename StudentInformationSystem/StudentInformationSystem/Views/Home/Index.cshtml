@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Student Information System";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Welcome to the Student Information System</h1>
+        <p>
+            This is a simple Student Information System that allows you to manage student data efficiently. You can add, update, and delete student records, view their details, and perform various other operations.
+        </p>
+        <hr />
+
+        <h3>Quick Links</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn btn-primary btn-block" href="/Students">View All Students</a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-success btn-block" href="/Students/Add">Add New Student</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

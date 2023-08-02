@@ -19,6 +19,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
         options.Password.RequireLowercase = false;
     })
     .AddEntityFrameworkStores<StudentInformationDbContext>();
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
