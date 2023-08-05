@@ -22,5 +22,14 @@ namespace StudentInformationSystem.Controllers
 
             return View(courses);
         }
+
+        public async Task<IActionResult> Schedule()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var courses = await this.courseService.GetStudentSchedule(userId);
+
+            return View(courses);
+        }
     }
 }

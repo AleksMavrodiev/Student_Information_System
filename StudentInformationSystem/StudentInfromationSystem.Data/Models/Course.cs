@@ -28,6 +28,8 @@ namespace StudentInformationSystem.Data.Models
         public int Credits { get; set; }
 
         public int LectureRoom { get; set; }
+
+        public DayOfWeek DayOfWeek { get; set; }
         public TimeOnly Start { get; set; }
         public TimeOnly End { get; set; }
 

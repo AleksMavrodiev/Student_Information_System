@@ -10,5 +10,6 @@ namespace StudentInformationSystem.Services.Contracts
     public interface ICourseService
     {
         Task<IEnumerable<StudentClassesViewModel>> GetStudentClasses(string studentId);
+        Task<IEnumerable<CourseScheduleViewModel>> GetStudentSchedule(string studentId);
     }
 }
