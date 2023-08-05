@@ -14,6 +14,8 @@ namespace StudentInformationSystem.Data.Configurations
                 .HasForeignKey(s => s.SpecialtyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            
+
             builder.HasData(this.GenerateStudents());
         }
 
