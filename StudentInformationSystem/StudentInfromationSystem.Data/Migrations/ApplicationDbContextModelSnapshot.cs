@@ -143,13 +143,14 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "20661c81-53ef-45dd-ab1c-0c5aee24c90d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e1ad3aa4-7f5a-423d-aaa1-5e3d5b78da17",
+                            ConcurrencyStamp = "9d80e7c2-7861-4761-875c-12a03f87a0de",
                             Email = "teacher@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "teacher@abv.bg",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE+3pJq+zFMIx+NlUT2UVHwPRNZ187yv4+CnGnR6M8TLMAGNE4dYRkqKKsDxJ0jc9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc033a32-17b3-4d48-9396-a9ac23b3c0a2",
+                            SecurityStamp = "d8686444-0816-40f8-9f04-fa90f30856a7",
                             TwoFactorEnabled = false,
                             UserName = "teacher@abv.bg"
                         },
@@ -157,14 +158,15 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "47af10f2-ef33-4637-a18f-40c27c56acb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bcb5157e-c923-486b-84de-2130f08454f2",
+                            ConcurrencyStamp = "0079c2f5-2b47-49b8-84b9-f9fea1f0fe41",
                             Email = "student@university.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "student@university.com",
                             NormalizedUserName = "student@university.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEL6VPWdSOGurc+x4jVCbPRzDxgc8J+U0Glk2FNa6lr//7s8GaEg6YRXWftuhMf6PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "219ed87d-334b-4ba5-97b0-187cb9a38625",
+                            SecurityStamp = "3bd233f2-8606-40e1-88d9-5f8eb23839b2",
                             TwoFactorEnabled = false,
                             UserName = "student@university.com"
                         });
@@ -544,7 +546,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fe00ca87-1230-491f-ae93-e28a3d62720f"),
+                            Id = new Guid("93023d3d-629f-4c90-9dd4-e4b25e2921da"),
                             EGN = "1234567890",
                             Email = "student@university.com",
                             FacultyNumber = "123456789",

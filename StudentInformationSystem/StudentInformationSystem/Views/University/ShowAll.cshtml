@@ -1,0 +1,39 @@
+﻿@model IEnumerable<UniversityAllViewModel>
+
+@{
+    ViewData["Title"] = "List of Universities";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>@ViewData["Title"]</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var university in Model)
+                {
+                    <tr>
+                        <td>@university.Name</td>
+                        <td>@university.Adress</td>
+                        <td>
+                            <a class="btn btn-primary" asp-area="" asp-controller="Faculty" asp-action="ShowByUni">Show Faculties</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
