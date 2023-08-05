@@ -56,7 +56,7 @@ namespace StudentInformationSystem.Data.Models
         [ForeignKey(nameof(Specialty))]
         public int SpecialtyId { get; set; }
 
-        public Specialty Specialty { get; set; } = null!;
+        public virtual Specialty Specialty { get; set; } = null!;
 
         public virtual ICollection<StudentCourses> StudentCourses { get; set; }
 

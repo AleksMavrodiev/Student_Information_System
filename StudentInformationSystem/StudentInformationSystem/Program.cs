@@ -12,7 +12,10 @@ internal class Program
 
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<StudentInformationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        {
+            options.UseSqlServer(connectionString);
+            options.UseLazyLoadingProxies();
+        });
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options =>
@@ -28,6 +31,7 @@ internal class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddScoped<IUniversityService, UniversityService>();
+        builder.Services.AddScoped<ICourseService, CourseService>();
 
         var app = builder.Build();
 

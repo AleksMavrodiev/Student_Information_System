@@ -20,7 +20,7 @@ namespace StudentInformationSystem.Data.Models
         [ForeignKey(nameof(University))]
         public int UniversityId { get; set; }
 
-        public University University { get; set; } = null!;
+        public virtual University University { get; set; } = null!;
 
         public virtual ICollection<Specialty> Specialties { get; set; }
     }

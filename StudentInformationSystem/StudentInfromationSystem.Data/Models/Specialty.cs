@@ -24,7 +24,7 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         public int FacultyId { get; set; }
 
-        public Faculty Faculty { get; set; } = null!;
+        public virtual Faculty Faculty { get; set; } = null!;
 
         public virtual ICollection<Course> Courses { get; set; } 
 

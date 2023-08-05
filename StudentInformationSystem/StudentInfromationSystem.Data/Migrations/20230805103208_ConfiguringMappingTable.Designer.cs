@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(StudentInformationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230805103208_ConfiguringMappingTable")]
+    partial class ConfiguringMappingTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,14 +145,14 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "20661c81-53ef-45dd-ab1c-0c5aee24c90d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d614423c-b588-4757-82e9-ad46fafc136c",
+                            ConcurrencyStamp = "26f04b54-0243-443c-824d-573e1d739d71",
                             Email = "teacher@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "teacher@abv.bg",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAoRro4BsI82d73b9BJNCqkubKb0VSfhTC2ScvxCsIHlh0BBQrNe+RvjBuoOMXVb4g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKwcPlcivrqzSqP63hAPNCKb3xV44/47aam6vMLvHK7OFzdHu32ZtYgpikxFXn2jIQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7778bff9-f82e-40ef-8d23-57d3c41a8929",
+                            SecurityStamp = "8f103e25-31ce-46f5-a33a-db4bb86f9488",
                             TwoFactorEnabled = false,
                             UserName = "teacher@abv.bg"
                         },
@@ -158,15 +160,15 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "47af10f2-ef33-4637-a18f-40c27c56acb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ddf252d1-9aae-43c3-8582-88271510742f",
+                            ConcurrencyStamp = "bf09da4c-cd88-4785-ac6f-a3a053d6c55b",
                             Email = "student@university.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "student@university.com",
                             NormalizedUserName = "student@university.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM6o1blz/V5AMvA8v7VGcJzQrdL7XzSkLxhsgbE8E9xf9KzAUwfdQh5SV2YNlcggRQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFaQLBlmQ3KG8bl4ITA3NPicZVvs9G/to2rEWf6Ggin9zME3rV6DxGMx7WOs8TQJXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e6cc0f11-1fed-4b38-8bd3-18dce382916e",
+                            SecurityStamp = "79a61458-0eec-449e-969e-cc6ba9186720",
                             TwoFactorEnabled = false,
                             UserName = "student@university.com"
                         });

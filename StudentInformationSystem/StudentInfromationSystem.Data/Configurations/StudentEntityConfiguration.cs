@@ -23,7 +23,7 @@ namespace StudentInformationSystem.Data.Configurations
             {
                 new Student()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("47af10f2-ef33-4637-a18f-40c27c56acb7"),
                     FirstName = "Ivan",
                     LastName = "Ivanov",
                     Email = "student@university.com",

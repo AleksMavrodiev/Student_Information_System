@@ -6,11 +6,11 @@ namespace StudentInformationSystem.Data.Models
     {
         [ForeignKey(nameof(Student))]
         public Guid StudentId { get; set; }
-        public Student Student { get; set; } = null!;
+        public virtual Student Student { get; set; } = null!;
 
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
-        public Course Course { get; set; } = null!;
+        public virtual Course Course { get; set; } = null!;
 
         public double Grade { get; set; }
     }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data.Configurations;
 using StudentInformationSystem.Data.Models;
+using StudentInfromationSystem.Data.Configurations;
 
 namespace StudentInformationSystem.Data
 {
@@ -21,6 +22,7 @@ namespace StudentInformationSystem.Data
         public DbSet<StudentCourses> StudentCourses { get; set; } = null!;
         public DbSet<Teacher> Teachers { get; set; } = null!;
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<StudentCourses>().HasKey(sc => new { sc.StudentId, sc.CourseId });
@@ -32,7 +34,7 @@ namespace StudentInformationSystem.Data
             builder.ApplyConfiguration(new TeacherEntityConfiguration());
             builder.ApplyConfiguration(new CourseEntityConfiguration());
             builder.ApplyConfiguration(new StudentEntityConfiguration());
-
+            builder.ApplyConfiguration(new StudentCourseEntityConfigurations());
             base.OnModelCreating(builder);
         }
     }

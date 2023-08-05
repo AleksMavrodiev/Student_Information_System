@@ -1,0 +1,44 @@
+﻿@using System.Security.Claims
+@model IEnumerable<StudentClassesViewModel>
+
+@{
+    ViewData["Title"] = "Student Courses";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<h2>Courses</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Lecture Room</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.LectureRoom</td>
+                <td>@course.Start</td>
+                <td>@course.End</td>
+                <td>
+                    <a class="btn btn-primary" href="/Students/CourseDetails/@course.Id">Details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
