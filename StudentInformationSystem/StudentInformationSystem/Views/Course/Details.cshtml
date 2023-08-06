@@ -1,0 +1,113 @@
+﻿@model CourseDetailsViewModel
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>@Model.Name</h1>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#description">Course Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#students">Student List and Grading</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#homework">Homework Submission</a>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content mt-4">
+        <!-- Description tab content -->
+        <div id="description" class="tab-pane fade show active">
+            <p>@Model.Description</p>
+        </div>
+
+        <!-- Students and Grading tab content -->
+        <div id="students" class="tab-pane fade">
+            <h3>Student List</h3>
+            <div class="form-group">
+                <input type="text" id="studentSearch" class="form-control" placeholder="Search for students" />
+            </div>
+            <ul id="studentList">
+                @foreach (var student in Model.Students)
+                {
+                    <li data-student-id="@student.Id">@student.Name</li>
+                }
+            </ul>
+
+            <h3>Grading</h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var student in Model.Students)
+                {
+                    <tr class="student-row" data-student-id="@student.Id">
+                        <td>@student.Name</td>
+                        <td>
+                            <input type="number" min="0" max="100" step="1" />
+                            <button class="btn btn-primary btn-sm">Save Grade</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Homework tab content -->
+        <div id="homework" class="tab-pane fade">
+            <h3>Homework Submission</h3>
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="file" />
+                    <button type="submit" class="btn btn-primary">Submit Homework</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript code for filtering students
+    $(document).ready(function () {
+        $("#studentSearch").on("keyup", function () {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById("studentSearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("studentList");
+            li = ul.getElementsByTagName("li");
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

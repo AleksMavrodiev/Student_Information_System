@@ -11,5 +11,6 @@ namespace StudentInformationSystem.Services.Contracts
     {
         Task<IEnumerable<StudentClassesViewModel>> GetStudentClasses(string studentId);
         Task<IEnumerable<CourseScheduleViewModel>> GetStudentSchedule(string studentId);
+        Task<CourseDetailsViewModel> GetCourseDetails(int courseId);
     }
 }

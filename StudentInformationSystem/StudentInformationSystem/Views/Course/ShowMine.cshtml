@@ -33,7 +33,7 @@
                 <td>@course.Start</td>
                 <td>@course.End</td>
                 <td>
-                    <a class="btn btn-primary" href="/Students/CourseDetails/@course.Id">Details</a>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Details</a>
                 </td>
             </tr>
         }

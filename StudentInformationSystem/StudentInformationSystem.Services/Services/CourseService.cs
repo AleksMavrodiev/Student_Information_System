@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data;
+using StudentInformationSystem.Data.Models;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Web.ViewModels.Course;
+using StudentInformationSystem.Web.ViewModels.Student;
 
 namespace StudentInformationSystem.Services.Services
 {
@@ -38,6 +40,26 @@ namespace StudentInformationSystem.Services.Services
                     End = c.Course.End,
                     LectureRoom = c.Course.LectureRoom
                 }).ToArrayAsync();
+        }
+
+        public async Task<CourseDetailsViewModel> GetCourseDetails(int courseId)
+        {
+            List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
+            {
+                Id = s.StudentId,
+                Name = s.Student.FirstName + " " + s.Student.LastName
+            }).ToListAsync();
+            StudentCourses sc = await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc => sc.CourseId == courseId);
+            
+            CourseDetailsViewModel courseDetails = new CourseDetailsViewModel()
+            {
+                Id = sc.CourseId,
+                Name = sc.Course.Name,
+                Description = sc.Course.Description,
+                Students = studentNames
+            };
+
+            return courseDetails;
         }
     }
 }

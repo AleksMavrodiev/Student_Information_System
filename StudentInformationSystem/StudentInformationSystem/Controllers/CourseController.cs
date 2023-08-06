@@ -31,5 +31,12 @@ namespace StudentInformationSystem.Controllers
 
             return View(courses);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var courseDetails = await this.courseService.GetCourseDetails(id);
+
+            return View(courseDetails);
+        }
     }
 }
