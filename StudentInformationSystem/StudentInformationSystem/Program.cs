@@ -32,6 +32,7 @@ internal class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddScoped<IUniversityService, UniversityService>();
         builder.Services.AddScoped<ICourseService, CourseService>();
+        builder.Services.AddScoped<IFacultyService, FacultyService>();
 
         var app = builder.Build();
 
@@ -55,7 +56,9 @@ internal class Program
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapDefaultControllerRoute();
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapRazorPages();
 
         app.Run();

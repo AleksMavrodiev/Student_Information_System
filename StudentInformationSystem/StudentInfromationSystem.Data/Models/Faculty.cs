@@ -16,6 +16,12 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         [StringLength(FacultyConstants.NameMaxLength, MinimumLength = FacultyConstants.NameMinLength)]
         public string Name { get; set; } = null!;
+        
+        public string ImageUrl { get; set; }
+
+        [Required]
+        [StringLength(FacultyConstants.DescriptionMaxLength, MinimumLength = FacultyConstants.DescriptionMinLength)]
+        public string Description { get; set; }
 
         [ForeignKey(nameof(University))]
         public int UniversityId { get; set; }

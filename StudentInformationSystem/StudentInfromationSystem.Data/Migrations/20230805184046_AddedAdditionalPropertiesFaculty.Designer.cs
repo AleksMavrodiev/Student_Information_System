@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(StudentInformationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230805184046_AddedAdditionalPropertiesFaculty")]
+    partial class AddedAdditionalPropertiesFaculty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,14 +145,14 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "20661c81-53ef-45dd-ab1c-0c5aee24c90d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb3d1478-b7fc-494d-b828-eedd70da0845",
+                            ConcurrencyStamp = "ad6684f6-1c61-4777-a3c8-9c396d3bb9cc",
                             Email = "teacher@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "teacher@abv.bg",
-                            PasswordHash = "AQAAAAEAACcQAAAAENK+BKsbUxyAZUgbl095oMVrBoSbsPSjjPLMFTq363623IpgL68/Gvr8DbyYDHpbDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFTilUyj98YZKB8R/iEdhZfzg4K75lZ4Je87Ntz+9Ab0n5sTWJ3+UXJq7XG4oluOow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6cdb90bc-d946-4aa4-bba3-d59e001e5096",
+                            SecurityStamp = "ae93c3a0-4b8d-4fb5-aa83-b5d7abb15701",
                             TwoFactorEnabled = false,
                             UserName = "teacher@abv.bg"
                         },
@@ -158,15 +160,15 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = "47af10f2-ef33-4637-a18f-40c27c56acb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72c82f7e-a51c-4b04-8355-07c1111ac36d",
+                            ConcurrencyStamp = "0d19585b-a4c2-4bc0-8608-a54a82cd9d5f",
                             Email = "student@university.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "student@university.com",
                             NormalizedUserName = "student@university.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFflJs+9IVuosThwOZHQhGqwuaxc4Pc9TYk4t60BvbfTuHdCffRuAMNUGpsQ+L2vMA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMh31RN/+gxsj4pthbV24nkcc+6sWU3p+cHjh27XFtMObDxtfipLAeP9tQnBpQ3vuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56c418f4-6582-4174-ba9b-07304291cfd6",
+                            SecurityStamp = "8d2c5d81-9169-46e1-b42f-2a4de3a2d43b",
                             TwoFactorEnabled = false,
                             UserName = "student@university.com"
                         });
@@ -421,7 +423,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 1,
                             Description = "The Faculty of Mathematics and Informatics is one of the largest faculties of Sofia University. It was founded in 1888. In 1963 the Faculty of Mathematics and Mechanics was divided into two separate faculties: the Faculty of Mathematics and the Faculty of Mechanics.",
-                            ImageUrl = "https://www.fmi.uni-sofia.bg/sites/default/files/fmi.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/fmi/fmi_logo.png",
                             Name = "Faculty of Mathematics and Informatics",
                             UniversityId = 1
                         },
@@ -429,7 +431,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 2,
                             Description = "The Faculty of Economics and Business Administration is the oldest and largest faculty of Sofia University. It was founded in 1905 as a Higher School of Commerce. In 1920 it was transformed into the Faculty of Commerce and Economics, and in 1940 it was renamed the Faculty of Economics.",
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/db/FEBA-SPRING.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/ikonomika/ikonomika_logo.png",
                             Name = "Faculty of Economics and Business Administration",
                             UniversityId = 2
                         },
@@ -437,7 +439,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 3,
                             Description = "The Faculty of Law is the oldest faculty of Sofia University. It was founded in 1892 as a Higher School of Law. In 1904 it was transformed into the Faculty of Law.",
-                            ImageUrl = "https://law.uni-sofia.bg/sites/default/files/2019-09/429_2.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/pravo/pravo_logo.png",
                             Name = "Faculty of Law",
                             UniversityId = 3
                         },
@@ -445,7 +447,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 4,
                             Description = "The Faculty of German Engineering was founded in 1941 as a Higher School of Mechanical and Electrical Engineering. In 1945 it was renamed the Higher School of Mechanical and Electrical Engineering in German. In 1947 it was transformed into the Faculty of German Engineering.",
-                            ImageUrl = "https://fdiba.tu-sofia.bg/wp-content/uploads/2022/02/Building-10B-1.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/german/german_logo.png",
                             Name = "Faculty of German Engineering",
                             UniversityId = 1
                         },
@@ -453,7 +455,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 5,
                             Description = "The Faculty of Philosophy is the oldest faculty of Sofia University. It was founded in 1888 as a Higher School of Philosophy. In 1904 it was transformed into the Faculty of Philosophy.",
-                            ImageUrl = "https://phls.uni-sofia.bg/documents/articles/111/colliseum-4.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/filosofski/filosofski_logo.png",
                             Name = "Faculty of Philosophy",
                             UniversityId = 2
                         },
@@ -461,7 +463,7 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 6,
                             Description = "The Faculty of Computer Systems and Control was founded in 1963 as a Higher School of Computer Systems and Control. In 1963 it was transformed into the Faculty of Computer Systems and Control.",
-                            ImageUrl = "https://www.tu-college.com/wp-content/uploads/2020/06/cropped-tu.jpg",
+                            ImageUrl = "https://www.uni-sofia.bg/images/stories/faculties/fksu/fksu_logo.png",
                             Name = "Faculty of Computer Systems and Control",
                             UniversityId = 1
                         });

@@ -22,6 +22,7 @@ namespace StudentInformationSystem.Services.Services
         {
             IEnumerable<UniversityAllViewModel> universities = await this.dbContext.Universities.Select(u => new UniversityAllViewModel
             {
+                Id = u.Id,
                 Name = u.Name,
                 Adress = u.Address
             }).ToArrayAsync();

@@ -28,7 +28,7 @@
                         <td>@university.Name</td>
                         <td>@university.Adress</td>
                         <td>
-                            <a class="btn btn-primary" asp-area="" asp-controller="Faculty" asp-action="ShowByUni">Show Faculties</a>
+                            <a class="btn btn-primary" asp-controller="Faculty" asp-action="ShowAllForUniversity" asp-route-id="@university.Id">Show Faculties</a>
                         </td>
                     </tr>
                 }
