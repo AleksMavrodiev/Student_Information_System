@@ -1,0 +1,87 @@
+﻿@model EditCourseViewModel
+
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Credits</label>
+        <input asp-for="Credits" class="form-control" />
+        <span asp-validation-for="Description" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Lecture Room</label>
+        <input asp-for="LectureRoom" class="form-control" />
+        <span asp-validation-for="LectureRoom" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Day of Week</label>
+        <select asp-for="DayOfWeek" class="form-control">
+            <option value="">Select Day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+        <span asp-validation-for="DayOfWeek" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Start Time</label>
+        <input asp-for="Start" class="form-control" id="StartTime" />
+        <span asp-validation-for="Start" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>End Time</label>
+        <input asp-for="End" class="form-control" id="EndTime" />
+        <span asp-validation-for="End" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Teacher</label>
+        <select asp-for="TeacherId" asp-items="Model.TeacherSelectList" class="form-control">
+            <option value="">Select Teacher</option>
+        </select>
+        <span asp-validation-for="TeacherId" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Specialties</label>
+        <select asp-for="SelectedSpecialtyIds" asp-items="Model.SpecialtyMultiSelectList" class="form-control" multiple>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                $("#errorAlert").removeClass("d-none");
+            }
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial"/>
+}

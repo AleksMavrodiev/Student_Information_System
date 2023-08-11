@@ -33,6 +33,8 @@ internal class Program
         builder.Services.AddScoped<IUniversityService, UniversityService>();
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<IFacultyService, FacultyService>();
+        builder.Services.AddScoped<ISpecialtyService, SpecialtyService>();
+        builder.Services.AddScoped<ITeacherService, TeacherService>();
 
         var app = builder.Build();
 

@@ -9,8 +9,10 @@ namespace StudentInformationSystem.Services.Contracts
 {
     public interface ICourseService
     {
-        Task<IEnumerable<StudentClassesViewModel>> GetStudentClasses(string studentId);
-        Task<IEnumerable<CourseScheduleViewModel>> GetStudentSchedule(string studentId);
-        Task<CourseDetailsViewModel> GetCourseDetails(int courseId);
+        Task<IEnumerable<StudentClassesViewModel>> GetStudentClassesAsync(string studentId);
+        Task<IEnumerable<CourseScheduleViewModel>> GetStudentScheduleAsync(string studentId);
+        Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId);
+        Task<EditCourseViewModel> GetCourseForEditAsync(int courseId);
+        Task EditCourseAsync(int id, EditCourseViewModel model);
     }
 }

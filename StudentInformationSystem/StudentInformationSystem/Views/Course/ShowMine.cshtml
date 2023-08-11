@@ -22,6 +22,8 @@
             <th>Start</th>
             <th>End</th>
             <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +37,12 @@
                 <td>
                     <a class="btn btn-primary" asp-area="" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Details</a>
                 </td>
+                <td>
+                    <a class="btn btn-warning" asp-area="" asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id">Edit</a>
+                </td>
+                    <td>
+                        <a class="btn btn-danger" asp-area="" asp-controller="Course" asp-action="Remove" asp-route-id="@course.Id">Delete</a>
+                    </td>
             </tr>
         }
         </tbody>

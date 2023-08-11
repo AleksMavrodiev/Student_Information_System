@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data;
 using StudentInformationSystem.Data.Models;
 using StudentInformationSystem.Services.Contracts;
@@ -15,7 +16,7 @@ namespace StudentInformationSystem.Services.Services
         {
             this.dbContext = dbContext;
         }
-        public async Task<IEnumerable<StudentClassesViewModel>> GetStudentClasses(string studentId)
+        public async Task<IEnumerable<StudentClassesViewModel>> GetStudentClassesAsync(string studentId)
         {
             IEnumerable<StudentClassesViewModel> studentClasses = await this.dbContext.StudentCourses.Where(sc => sc.StudentId.ToString() == studentId)
                 .Select(c => new StudentClassesViewModel
@@ -30,7 +31,7 @@ namespace StudentInformationSystem.Services.Services
             return studentClasses;
         }
 
-        public async Task<IEnumerable<CourseScheduleViewModel>> GetStudentSchedule(string studentId)
+        public async Task<IEnumerable<CourseScheduleViewModel>> GetStudentScheduleAsync(string studentId)
         {
             return await this.dbContext.StudentCourses.Where(sc => sc.StudentId.ToString() == studentId).Select(c => new CourseScheduleViewModel
             {
@@ -42,7 +43,7 @@ namespace StudentInformationSystem.Services.Services
                 }).ToArrayAsync();
         }
 
-        public async Task<CourseDetailsViewModel> GetCourseDetails(int courseId)
+        public async Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId)
         {
             List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
             {
@@ -60,6 +61,51 @@ namespace StudentInformationSystem.Services.Services
             };
 
             return courseDetails;
+        }
+
+        public async Task<EditCourseViewModel> GetCourseForEditAsync(int courseId)
+        {
+            var teachers = await this.dbContext.Teachers.ToListAsync();
+            var specialties = await this.dbContext.Specialties.ToListAsync();
+
+            var course = await this.dbContext.Courses.FirstAsync(c => c.Id == courseId);
+
+            return new EditCourseViewModel()
+            {
+                Name = course.Name,
+                Description = course.Description,
+                Credits = course.Credits,
+                LectureRoom = course.LectureRoom,
+                DayOfWeek = course.DayOfWeek,
+                Start = course.Start,
+                End = course.End,
+                TeacherId = course.TeacherId,
+                TeacherSelectList = teachers
+                    .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.LastName }).ToList(),
+                SpecialtyMultiSelectList = specialties
+                    .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList()
+            };
+        }
+
+        public Task EditCourseAsync(int id, EditCourseViewModel model)
+        {
+            var course = this.dbContext.Courses.First(c => c.Id == id);
+            if (course == null)
+            {
+                throw new InvalidOperationException($"Course with id {id} does not exist.");
+            }
+
+            course.Name = model.Name;
+            course.Description = model.Description;
+            course.Credits = model.Credits;
+            course.LectureRoom = model.LectureRoom;
+            course.DayOfWeek = model.DayOfWeek;
+            course.Start = model.Start;
+            course.End = model.End;
+            course.TeacherId = model.TeacherId;
+            course.SpecialtyId = model.SelectedSpecialtyIds[0];
+
+            return this.dbContext.SaveChangesAsync();
         }
     }
 }
