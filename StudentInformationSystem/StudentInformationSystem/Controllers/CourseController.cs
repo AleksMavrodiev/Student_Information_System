@@ -47,6 +47,8 @@ namespace StudentInformationSystem.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var course = await this.courseService.GetCourseForEditAsync(id);
+            course.Teachers = await this.teacherService.GetTeachersForListItemAsync();
+            course.Specialties = await this.specialtyService.GetSpecialtiesForListItemAsync();
 
             return View(course);
         }
@@ -56,20 +58,20 @@ namespace StudentInformationSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.TeacherSelectList = await this.teacherService.GetTeachersForListItemAsync();
-                model.SpecialtyMultiSelectList = await this.specialtyService.GetSpecialtiesForListItemAsync();
+                TempData["ErrorMessage"] = "You should fill all the fields";
+                model.Teachers = await this.teacherService.GetTeachersForListItemAsync();
+                model.Specialties = await this.specialtyService.GetSpecialtiesForListItemAsync();
                 return View(model);
             }
 
-            if (model.Start >= model.End || model.End < model.Start)
+            if (model.Start.Hour >= model.End.Hour || model.End.Hour < model.Start.Hour)
             {
                 TempData["ErrorMessage"] = "You should put valid start and end times";
-                model.TeacherSelectList = await this.teacherService.GetTeachersForListItemAsync();
-                model.SpecialtyMultiSelectList = await this.specialtyService.GetSpecialtiesForListItemAsync();
+                model.Teachers = await this.teacherService.GetTeachersForListItemAsync();
+                model.Specialties = await this.specialtyService.GetSpecialtiesForListItemAsync();
                 return View(model);
             }
 
-            TempData["ErrorMessage"] = null;
 
             await this.courseService.EditCourseAsync(id, model);
 

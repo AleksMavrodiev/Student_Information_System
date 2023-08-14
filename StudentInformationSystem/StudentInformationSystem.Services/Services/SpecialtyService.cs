@@ -21,21 +21,15 @@ namespace StudentInformationSystem.Services.Services
         }
 
 
-        public async Task<List<SelectListItem>> GetSpecialtiesForListItemAsync()
+        public async Task<IEnumerable<SpecialtyListViewModel>> GetSpecialtiesForListItemAsync()
         {
             var specialties = await this.dbContext.Specialties.Select(s => new SpecialtyListViewModel()
             {
                 Name = s.Name,
-                Id = s.Id.ToString()
-            }).ToListAsync();
+                Id = s.Id
+            }).ToArrayAsync();
             
-            var speacialtiesForListItem = specialties.Select(s => new SelectListItem()
-            {
-                Text = s.Name,
-                Value = s.Id
-            }).ToList();
-
-            return speacialtiesForListItem;
+            return specialties;
         }
     }
 }

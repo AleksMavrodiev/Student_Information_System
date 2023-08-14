@@ -65,8 +65,6 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task<EditCourseViewModel> GetCourseForEditAsync(int courseId)
         {
-            var teachers = await this.dbContext.Teachers.ToListAsync();
-            var specialties = await this.dbContext.Specialties.ToListAsync();
 
             var course = await this.dbContext.Courses.FirstAsync(c => c.Id == courseId);
 
@@ -80,10 +78,7 @@ namespace StudentInformationSystem.Services.Services
                 Start = course.Start,
                 End = course.End,
                 TeacherId = course.TeacherId,
-                TeacherSelectList = teachers
-                    .Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.LastName }).ToList(),
-                SpecialtyMultiSelectList = specialties
-                    .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name }).ToList()
+                SpecialtyId = course.SpecialtyId
             };
         }
 
@@ -103,7 +98,7 @@ namespace StudentInformationSystem.Services.Services
             course.Start = model.Start;
             course.End = model.End;
             course.TeacherId = model.TeacherId;
-            course.SpecialtyId = model.SelectedSpecialtyIds[0];
+            course.SpecialtyId = model.SpecialtyId;
 
             return this.dbContext.SaveChangesAsync();
         }

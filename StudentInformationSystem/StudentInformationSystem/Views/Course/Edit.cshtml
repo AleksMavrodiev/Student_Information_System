@@ -49,25 +49,33 @@
     </div>
     <div class="form-group">
         <label>Start Time</label>
-        <input asp-for="Start" class="form-control" id="StartTime" />
+        <input asp-for="Start" class="form-control" id="StartTime" type="time" step="1" placeholder="HH:mm" />
         <span asp-validation-for="Start" class="small text-danger"></span>
     </div>
     <div class="form-group">
         <label>End Time</label>
-        <input asp-for="End" class="form-control" id="EndTime" />
+        <input asp-for="End" class="form-control" id="EndTime" type="time" step="1" placeholder="HH:mm" />
         <span asp-validation-for="End" class="small text-danger"></span>
     </div>
     <div class="form-group">
-        <label>Teacher</label>
-        <select asp-for="TeacherId" asp-items="Model.TeacherSelectList" class="form-control">
-            <option value="">Select Teacher</option>
+        <label asp-for="TeacherId"></label>
+        <select asp-for="TeacherId" class="form-control">
+            @foreach (var teacher in Model.Teachers)
+            {
+                <option value="@teacher.Id">@teacher.FullName</option>
+            }
         </select>
         <span asp-validation-for="TeacherId" class="small text-danger"></span>
     </div>
     <div class="form-group">
-        <label>Specialties</label>
-        <select asp-for="SelectedSpecialtyIds" asp-items="Model.SpecialtyMultiSelectList" class="form-control" multiple>
+        <label asp-for="SpecialtyId"></label>
+        <select asp-for="SpecialtyId" class="form-control">
+            @foreach (var specialty in Model.Specialties)
+            {
+                <option value="@specialty.Id">@specialty.Name</option>
+            }
         </select>
+        <span asp-validation-for="SpecialtyId" class="small text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
@@ -80,6 +88,10 @@
             if (errorMessage) {
                 $("#errorAlert").removeClass("d-none");
             }
+
+            $(".alert .close").on("click", function () {
+                $(this).parent().fadeOut(500);
+            });
         });
     </script>
 

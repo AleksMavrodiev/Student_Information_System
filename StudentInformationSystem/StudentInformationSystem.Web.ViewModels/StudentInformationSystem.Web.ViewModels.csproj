@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StudentInformationSystem.Common\StudentInformationSystem.Common.csproj" />
     <ProjectReference Include="..\StudentInfromationSystem.Data\StudentInfromationSystem.Data.csproj" />
+    <ProjectReference Include="..\StudentInfromationSystem.Web.Infrastructure\StudentInfromationSystem.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Services.Services;
+using StudentInfromationSystem.Data.Configurations;
 
 internal class Program
 {
@@ -30,6 +32,7 @@ internal class Program
             .AddEntityFrameworkStores<StudentInformationDbContext>();
 
         builder.Services.AddControllersWithViews();
+        
         builder.Services.AddScoped<IUniversityService, UniversityService>();
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<IFacultyService, FacultyService>();

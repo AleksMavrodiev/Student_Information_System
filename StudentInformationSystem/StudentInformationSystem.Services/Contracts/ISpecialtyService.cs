@@ -10,6 +10,6 @@ namespace StudentInformationSystem.Services.Contracts
 {
     public interface ISpecialtyService
     {
-        public Task<List<SelectListItem>> GetSpecialtiesForListItemAsync();
+        public Task<IEnumerable<SpecialtyListViewModel>> GetSpecialtiesForListItemAsync();
     }
 }

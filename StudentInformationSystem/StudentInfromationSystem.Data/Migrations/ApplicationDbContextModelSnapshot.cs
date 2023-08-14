@@ -302,7 +302,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
 
                     b.HasData(
                         new
@@ -414,7 +414,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("Faculties", (string)null);
 
                     b.HasData(
                         new
@@ -487,7 +487,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Specialties");
+                    b.ToTable("Specialties", (string)null);
 
                     b.HasData(
                         new
@@ -571,7 +571,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
 
                     b.HasData(
                         new
@@ -605,7 +605,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("StudentCourses");
+                    b.ToTable("StudentCourses", (string)null);
 
                     b.HasData(
                         new
@@ -667,7 +667,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
 
                     b.HasData(
                         new
@@ -707,7 +707,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities");
+                    b.ToTable("Universities", (string)null);
 
                     b.HasData(
                         new

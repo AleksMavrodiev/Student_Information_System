@@ -10,6 +10,6 @@ namespace StudentInformationSystem.Services.Contracts
 {
     public interface ITeacherService
     {
-        Task<List<SelectListItem>> GetTeachersForListItemAsync();
+        Task<IEnumerable<TeacherListViewModel>> GetTeachersForListItemAsync();
     }
 }

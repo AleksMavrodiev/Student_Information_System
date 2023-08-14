@@ -19,21 +19,17 @@ namespace StudentInformationSystem.Services.Services
         {
             this.dbContext = dbContext;
         }
-        public async Task<List<SelectListItem>> GetTeachersForListItemAsync()
+        public async Task<IEnumerable<TeacherListViewModel>> GetTeachersForListItemAsync()
         {
             var teachers = await this.dbContext.Teachers.Select(t => new TeacherListViewModel()
             {
                 Id = t.Id.ToString(),
                 FullName = t.FirstName + " " + t.LastName,
-            }).ToListAsync();
+            }).ToArrayAsync();
 
-            var teachersForListItem = teachers.Select(t => new SelectListItem()
-            {
-                Text = t.FullName,
-                Value = t.Id
-            }).ToList();
+            
 
-            return teachersForListItem;
+            return teachers;
         }
     }
 }

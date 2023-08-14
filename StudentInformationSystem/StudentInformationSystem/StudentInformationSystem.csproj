@@ -20,6 +20,7 @@
     <ProjectReference Include="..\StudentInformationSystem.Services\StudentInformationSystem.Services.csproj" />
     <ProjectReference Include="..\StudentInformationSystem.Web.ViewModels\StudentInformationSystem.Web.ViewModels.csproj" />
     <ProjectReference Include="..\StudentInfromationSystem.Data\StudentInfromationSystem.Data.csproj" />
+    <ProjectReference Include="..\StudentInfromationSystem.Web.Infrastructure\StudentInfromationSystem.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

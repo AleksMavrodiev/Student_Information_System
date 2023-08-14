@@ -6,8 +6,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using static StudentInformationSystem.Common.DataValidationConstants;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentInformationSystem.Web.ViewModels.Speacialty;
+using StudentInformationSystem.Web.ViewModels.Teacher;
 
 namespace StudentInformationSystem.Web.ViewModels.Course
 {
@@ -28,14 +31,20 @@ namespace StudentInformationSystem.Web.ViewModels.Course
         public int LectureRoom { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
+
+        [ModelBinder(typeof(TimeOnlyModelBinder))]
         public TimeOnly Start { get; set; }
+
+        [ModelBinder(typeof(TimeOnlyModelBinder))]
         public TimeOnly End { get; set; }
 
-        [Required]
+        [Display(Name="Teacher")]
         public Guid TeacherId { get; set; }
 
-        public List<SelectListItem> TeacherSelectList { get; set; }
-        public List<int> SelectedSpecialtyIds { get; set; }
-        public List<SelectListItem> SpecialtyMultiSelectList { get; set; }
+        public IEnumerable<TeacherListViewModel>? Teachers { get; set; }
+
+        [Display(Name="Specialty")]
+        public int SpecialtyId { get; set; }
+        public IEnumerable<SpecialtyListViewModel>? Specialties { get; set; } 
     }
 }

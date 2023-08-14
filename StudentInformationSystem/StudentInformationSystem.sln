@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Web.ViewModels", "StudentInformationSystem.Web.ViewModels\StudentInformationSystem.Web.ViewModels.csproj", "{B4A86B2F-FFBF-4774-9B92-B0F2575AB2D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInfromationSystem.Data", "StudentInfromationSystem.Data\StudentInfromationSystem.Data.csproj", "{E0B4BCA5-F8DE-4ECD-BECF-57D15BA1449C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInfromationSystem.Data", "StudentInfromationSystem.Data\StudentInfromationSystem.Data.csproj", "{E0B4BCA5-F8DE-4ECD-BECF-57D15BA1449C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInformationSystem.Common", "StudentInformationSystem.Common\StudentInformationSystem.Common.csproj", "{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Common", "StudentInformationSystem.Common\StudentInformationSystem.Common.csproj", "{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInfromationSystem.Web.Infrastructure", "StudentInfromationSystem.Web.Infrastructure\StudentInfromationSystem.Web.Infrastructure.csproj", "{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
