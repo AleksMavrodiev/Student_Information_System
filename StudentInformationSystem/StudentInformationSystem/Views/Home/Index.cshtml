@@ -7,6 +7,28 @@
 <head>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            font-size: 24px;
+        }
+        .nav-link {
+            font-size: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .panel{
+            margin-top: 50px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -24,6 +46,40 @@
             <div class="col-md-6">
                 <a class="btn btn-success btn-block" href="/Students/Add">Add New Student</a>
             </div>
+        </div>
+        
+        <div class="panel">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Admin Panel</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Student" asp-action="All">View All Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="University" asp-action="Add">Add University</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Course" asp-action="All">List All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Teacher" asp-action="Add">Add Teacher</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Student" asp-action="Add">Add Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Teacher" asp-action="All">All Teachers</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
     </div>
 </body>
