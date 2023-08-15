@@ -1,23 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+using StudentInformationSystem.Data.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using StudentInformationSystem.Web.ViewModels.Speacialty;
 using static StudentInformationSystem.Common.DataValidationConstants;
 
-namespace StudentInformationSystem.Data.Models
+namespace StudentInformationSystem.Web.ViewModels.Student
 {
-    public class Student
+    public class StudentAddViewModel
     {
-        public Student()
-        {
-            this.Id = Guid.NewGuid();
-            this.StudentCourses = new HashSet<StudentCourses>();
-        }
-
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        [StringLength(StudentConstants.FirstNameMaxLength, MinimumLength = StudentConstants.FirstNameMinLength)]
         public string FirstName { get; set; } = null!;
 
         [Required]
@@ -50,17 +46,14 @@ namespace StudentInformationSystem.Data.Models
 
         [Required]
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = null!;
 
-        public virtual IdentityUser User { get; set; }
+        public virtual IdentityUser<Guid> User { get; set; }
 
         [Required]
         [ForeignKey(nameof(Specialty))]
         public int SpecialtyId { get; set; }
 
-        public virtual Specialty Specialty { get; set; } = null!;
-
-        public virtual ICollection<StudentCourses> StudentCourses { get; set; }
-
+        public IEnumerable<SpecialtyListViewModel> Specialties { get; set; } 
     }
 }

@@ -31,6 +31,8 @@ namespace StudentInformationSystem.Data.Models
 
         public string PhoneNumber { get; set; } = null!;
 
+        public byte[]? ProfilePicture { get; set; }
+
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
