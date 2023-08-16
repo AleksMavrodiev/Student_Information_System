@@ -40,6 +40,9 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task CreateStudentAsync(StudentAddViewModel model)
         {
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+            string initialPassword = "123456";
+
             var student = new Student
             {
                 Id = Guid.NewGuid(),
@@ -59,8 +62,11 @@ namespace StudentInformationSystem.Services.Services
             {
                 Id = student.Id.ToString(),
                 UserName = model.Email,
-                Email = model.Email
+                Email = $"{student.FirstName.ToLower()}.{student.LastName.ToLower()}",
+                NormalizedUserName = model.Email.ToUpper(),
             };
+
+            student.User.PasswordHash = passwordHasher.HashPassword(student.User, initialPassword);
             await this.dbcontext.Students.AddAsync(student);
             await this.dbcontext.SaveChangesAsync();
         }

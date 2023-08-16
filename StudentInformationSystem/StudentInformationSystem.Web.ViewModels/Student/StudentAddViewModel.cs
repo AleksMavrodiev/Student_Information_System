@@ -44,13 +44,13 @@ namespace StudentInformationSystem.Web.ViewModels.Student
         [Required]
         public bool IsForeign { get; set; }
 
-        [Required]
+        
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
+        public string? UserId { get; set; } 
 
-        public virtual IdentityUser<Guid> User { get; set; }
+        public virtual IdentityUser? User { get; set; }
 
-        [Required]
+        
         [ForeignKey(nameof(Specialty))]
         public int SpecialtyId { get; set; }
 
