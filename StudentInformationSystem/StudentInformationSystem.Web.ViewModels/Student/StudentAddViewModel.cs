@@ -54,6 +54,6 @@ namespace StudentInformationSystem.Web.ViewModels.Student
         [ForeignKey(nameof(Specialty))]
         public int SpecialtyId { get; set; }
 
-        public IEnumerable<SpecialtyListViewModel> Specialties { get; set; } 
+        public IEnumerable<SpecialtyListViewModel>? Specialties { get; set; } 
     }
 }

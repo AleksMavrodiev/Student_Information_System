@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data;
@@ -33,9 +35,9 @@ namespace StudentInformationSystem.Services.Services
             }).ToArrayAsync();
         }
 
-        public Task<Student> GetStudentAsync(int id)
+        public async Task<Student> GetStudentAsync(string id)
         {
-            throw new NotImplementedException();
+            return await this.dbcontext.Students.FirstOrDefaultAsync(s => s.UserId == id);
         }
 
         public async Task CreateStudentAsync(StudentAddViewModel model)
@@ -62,13 +64,56 @@ namespace StudentInformationSystem.Services.Services
             {
                 Id = student.Id.ToString(),
                 UserName = model.Email,
-                Email = $"{student.FirstName.ToLower()}.{student.LastName.ToLower()}",
+                Email = $"{student.FirstName.ToLower()}.{student.LastName.ToLower()}@university.com",
                 NormalizedUserName = model.Email.ToUpper(),
             };
 
             student.User.PasswordHash = passwordHasher.HashPassword(student.User, initialPassword);
             await this.dbcontext.Students.AddAsync(student);
             await this.dbcontext.SaveChangesAsync();
+        }
+
+        public async Task RemoveStudentProfilePictureAsync(string userId)
+        {
+            var student = await this.GetStudentAsync(userId);
+
+            student.ProfilePicture = null;
+
+            await dbcontext.SaveChangesAsync();
+        }
+
+        public async Task SaveStudentProfilePictureAsync(string userId, IFormFile profilePicture)
+        {
+            var student = await this.GetStudentAsync(userId);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await profilePicture.CopyToAsync(memoryStream);
+                student.ProfilePicture = memoryStream.ToArray();
+            }
+
+            await this.dbcontext.SaveChangesAsync();
+        }
+
+        public async Task<StudentProfileViewModel> GetStudentProfileAsync(string userId)
+        {
+            var student = await this.GetStudentAsync(userId);
+
+            if (student == null)
+            {
+                throw new InvalidOperationException("Student not found!");
+            }
+
+            return new StudentProfileViewModel()
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                FacultyNumber = student.FacultyNumber,
+                PhoneNumber = student.PhoneNumber,
+                Email = student.Email,
+                EGN = student.EGN,
+                ProfilePicture = student.ProfilePicture
+            };
         }
 
         public Task<Student> UpdateStudentAsync(Student student)
