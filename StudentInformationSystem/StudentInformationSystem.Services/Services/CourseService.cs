@@ -102,5 +102,17 @@ namespace StudentInformationSystem.Services.Services
 
             return this.dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<CourseAllViewModel>> GetAllCoursesAsync()
+        {
+            return await this.dbContext.Courses.Select(c => new CourseAllViewModel()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Credits = c.Credits,
+                StudentsCount = dbContext.StudentCourses.Count(sc => sc.CourseId == c.Id)
+            }).ToArrayAsync();
+        }
     }
 }

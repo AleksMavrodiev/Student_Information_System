@@ -77,5 +77,12 @@ namespace StudentInformationSystem.Controllers
 
             return RedirectToAction("Details", new { id = id });
         }
+
+        public async Task<IActionResult> ShowAll()
+        {
+            var courses = await this.courseService.GetAllCoursesAsync();
+
+            return View(courses);
+        }
     }
 }

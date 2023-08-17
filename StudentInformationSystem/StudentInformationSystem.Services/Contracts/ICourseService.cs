@@ -14,5 +14,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId);
         Task<EditCourseViewModel> GetCourseForEditAsync(int courseId);
         Task EditCourseAsync(int id, EditCourseViewModel model);
+        Task<IEnumerable<CourseAllViewModel>> GetAllCoursesAsync();
     }
 }

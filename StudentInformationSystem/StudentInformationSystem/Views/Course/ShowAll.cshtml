@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CourseAllViewModel>
+@{
+    ViewData["Title"] = "All Courses";
+}
+
+<div class="container">
+    <h2 class="my-4">All Courses</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Credits</th>
+                <th>Students Count</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Name</td>
+                    <td>@course.Description</td>
+                    <td>@course.Credits</td>
+                    <td>@course.StudentsCount</td>
+                    <td>
+                        <a asp-area="" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-area="" asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-area="" asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
