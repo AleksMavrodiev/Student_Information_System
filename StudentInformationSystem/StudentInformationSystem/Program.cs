@@ -29,7 +29,10 @@ internal class Program
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             })
-            .AddEntityFrameworkStores<StudentInformationDbContext>();
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<StudentInformationDbContext>()
+            .AddDefaultTokenProviders();
+            
 
         builder.Services.AddControllersWithViews();
         
@@ -38,7 +41,8 @@ internal class Program
         builder.Services.AddScoped<IFacultyService, FacultyService>();
         builder.Services.AddScoped<ISpecialtyService, SpecialtyService>();
         builder.Services.AddScoped<ITeacherService, TeacherService>();
-        builder.Services.AddScoped<IStudentService, StudentService>();
+        builder.Services.AddScoped<IStudentService, StudentService>(); ;
+        builder.Services.AddScoped<IUserService, UserService>();
 
         var app = builder.Build();
 

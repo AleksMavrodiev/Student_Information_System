@@ -7,7 +7,7 @@ using StudentInfromationSystem.Data.Configurations;
 
 namespace StudentInformationSystem.Data
 {
-    public class StudentInformationDbContext : IdentityDbContext
+    public class StudentInformationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public StudentInformationDbContext(DbContextOptions<StudentInformationDbContext> options)
             : base(options)

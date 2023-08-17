@@ -69,6 +69,7 @@ namespace StudentInformationSystem.Services.Services
             };
 
             student.User.PasswordHash = passwordHasher.HashPassword(student.User, initialPassword);
+
             await this.dbcontext.Students.AddAsync(student);
             await this.dbcontext.SaveChangesAsync();
         }
