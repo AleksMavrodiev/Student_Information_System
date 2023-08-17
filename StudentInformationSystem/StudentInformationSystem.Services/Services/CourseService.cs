@@ -114,5 +114,31 @@ namespace StudentInformationSystem.Services.Services
                 StudentsCount = dbContext.StudentCourses.Count(sc => sc.CourseId == c.Id)
             }).ToArrayAsync();
         }
+
+        public async Task CreateCourseAsync(EditCourseViewModel model)
+        {
+            var course = new Course()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Credits = model.Credits,
+                LectureRoom = model.LectureRoom,
+                DayOfWeek = model.DayOfWeek,
+                Start = model.Start,
+                End = model.End,
+                TeacherId = model.TeacherId,
+                SpecialtyId = model.SpecialtyId,
+            };
+
+            await this.dbContext.Courses.AddAsync(course);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteCourseAsync(int id)
+        {
+            var course = await this.dbContext.Courses.FirstAsync(c => c.Id == id); 
+            this.dbContext.Courses.Remove(course);
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }

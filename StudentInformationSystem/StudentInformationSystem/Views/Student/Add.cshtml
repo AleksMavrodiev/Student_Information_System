@@ -6,53 +6,59 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
+<div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <div class="container mt-4">
     <h2>Add Student</h2>
     <form asp-action="Add" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName"  />
-                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName"/>
+            <span asp-validation-for="FirstName" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" />
-                <span asp-validation-for="LastName" class="small text-danger"></span>
+            <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName"/>
+            <span asp-validation-for="LastName" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="EGN">EGN</label>
-            <input type="text" class="form-control" id="EGN" name="EGN" value="@Model.EGN"  />
-                <span asp-validation-for="EGN" class="small text-danger"></span>
+            <input type="text" class="form-control" id="EGN" name="EGN" value="@Model.EGN"/>
+            <span asp-validation-for="EGN" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email"  />
-                <span asp-validation-for="Email" class="small text-danger"></span>
+            <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email"/>
+            <span asp-validation-for="Email" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="FacultyNumber">Faculty Number</label>
-            <input type="text" class="form-control" id="FacultyNumber" name="FacultyNumber" value="@Model.FacultyNumber" />
-                <span asp-validation-for="FacultyNumber" class="small text-danger"></span>
+            <input type="text" class="form-control" id="FacultyNumber" name="FacultyNumber" value="@Model.FacultyNumber"/>
+            <span asp-validation-for="FacultyNumber" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="PhoneNumber">Phone Number</label>
-            <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber"  />
-                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+            <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber"/>
+            <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label for="ProfilePicture">Profile Picture</label>
-            <input type="file" class="form-control-file" id="ProfilePicture" name="ProfilePicture" />
+            <input type="file" class="form-control-file" id="ProfilePicture" name="ProfilePicture"/>
             <span asp-validation-for="ProfilePicture" class="small text-danger"></span>
         </div>
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+            <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" value="true" @(Model.IsActive ? "checked" : "")/>
             <label class="form-check-label" for="IsActive">Active</label>
-                <span asp-validation-for="IsActive" class="small text-danger"></span>
+            <span asp-validation-for="IsActive" class="small text-danger"></span>
         </div>
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="IsForeign" name="IsForeign" value="true" @(Model.IsForeign ? "checked" : "") />
+            <input type="checkbox" class="form-check-input" id="IsForeign" name="IsForeign" value="true" @(Model.IsForeign ? "checked" : "")/>
             <label class="form-check-label" for="IsForeign">Foreign</label>
-                <span asp-validation-for="IsForeign" class="small text-danger"></span>
+            <span asp-validation-for="IsForeign" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SpecialtyId"></label>
@@ -70,4 +76,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<partial name="_ValidationScriptsPartial" />
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                $("#errorAlert").removeClass("d-none");
+            }
+
+            $(".alert .close").on("click", function () {
+                $(this).parent().fadeOut(500);
+            });
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
