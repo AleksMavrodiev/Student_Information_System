@@ -140,5 +140,44 @@ namespace StudentInformationSystem.Services.Services
             this.dbContext.Courses.Remove(course);
             await this.dbContext.SaveChangesAsync();
         }
+
+        public async Task EnrollStudentAsync(int courseId, string studentId)
+        {
+            try
+            {
+                await this.dbContext.StudentCourses.AddAsync(new StudentCourses()
+                {
+                    CourseId = courseId,
+                    StudentId = Guid.Parse(studentId),
+                    IsEnrolled = true
+                });
+
+                await this.dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException($"Student with id {studentId} is already enrolled in this course.");
+            }
+        }
+
+        public async Task UnenrollStudentAsync(int courseId, string studentId)
+        {
+            var studentCourse = await this.dbContext.StudentCourses.FirstAsync(sc => sc.CourseId == courseId && sc.StudentId.ToString() == studentId);
+            studentCourse.IsEnrolled = false;
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<EnrollStudentViewModel>> FetchStudentsForCourseAsync(int id)
+        {
+            return await this.dbContext.Students.Select(s => new EnrollStudentViewModel()
+            {
+               StudentId = s.Id,
+               FirstName = s.FirstName,
+               LastName = s.LastName,
+               FacultyNumber = s.FacultyNumber,
+               StudentCourse = this.dbContext.StudentCourses.FirstOrDefault(sc => sc.StudentId == s.Id && sc.CourseId == id) ?? new StudentCourses()
+            }).ToArrayAsync();
+
+        }
     }
 }

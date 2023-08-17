@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data;
 
@@ -11,9 +12,10 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(StudentInformationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230817202937_AdditionalFieldStudentCourseEntity")]
+    partial class AdditionalFieldStudentCourseEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,7 +304,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
 
                     b.HasData(
                         new
@@ -414,7 +416,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
 
                     b.HasData(
                         new
@@ -487,7 +489,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Specialties", (string)null);
+                    b.ToTable("Specialties");
 
                     b.HasData(
                         new
@@ -574,7 +576,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new
@@ -611,7 +613,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("StudentCourses", (string)null);
+                    b.ToTable("StudentCourses");
 
                     b.HasData(
                         new
@@ -679,7 +681,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
 
                     b.HasData(
                         new
@@ -719,7 +721,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities", (string)null);
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new

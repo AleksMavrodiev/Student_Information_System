@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentInformationSystem.Web.ViewModels.Course;
+using StudentInformationSystem.Web.ViewModels.Student;
 
 namespace StudentInformationSystem.Services.Contracts
 {
@@ -17,5 +18,8 @@ namespace StudentInformationSystem.Services.Contracts
         Task<IEnumerable<CourseAllViewModel>> GetAllCoursesAsync();
         Task CreateCourseAsync(EditCourseViewModel model);
         Task DeleteCourseAsync(int id);
+        Task EnrollStudentAsync(int courseId, string studentId);
+        Task UnenrollStudentAsync(int courseId, string studentId);
+        Task<IEnumerable<EnrollStudentViewModel>> FetchStudentsForCourseAsync(int id);
     }
 }

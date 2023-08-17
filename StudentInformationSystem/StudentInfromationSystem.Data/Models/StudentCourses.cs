@@ -13,5 +13,7 @@ namespace StudentInformationSystem.Data.Models
         public virtual Course Course { get; set; } = null!;
 
         public double Grade { get; set; }
+
+        public bool IsEnrolled { get; set; }
     }
 }

@@ -1,40 +1,44 @@
-﻿@model IEnumerable<StudentAllViewModel>
+﻿@model IEnumerable<EnrollStudentViewModel>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Student List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-4">
-        <h2>Student List</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Faculty Number</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var student in Model)
-                {
-                    <tr>
-                        <td>@student.FacultyNumber</td>
-                        <td>@student.FirstName</td>
-                        <td>@student.LastName</td>
-                        <td>
-                            <a asp-area="" asp-controller="Course" asp-action="AddStudentsToCourse" asp-route-id="@student.Id" class="btn btn-info">Add Student</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+@{
+    ViewData["Title"] = "Add Students to Course";
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<div class="container">
+    <h2 class="my-4">Add Students to Course: @Model</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Faculty Number</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.FacultyNumber</td>
+                <td>
+                    @if (student.StudentCourse.IsEnrolled)
+                    {
+                        <form asp-action="RemoveStudent" asp-route-courseId="@ViewBag.CourseId" asp-route-studentId="@student.StudentId" method="post">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="AddStudentsToCourse" asp-route-courseId="@ViewBag.CourseId" asp-route-studentId="@student.StudentId" method="post">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

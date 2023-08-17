@@ -129,18 +129,35 @@ namespace StudentInformationSystem.Controllers
             return RedirectToAction("ShowAll");
         }
 
-        public async Task<IActionResult> AddStudents()
+        public async Task<IActionResult> AddStudents(int id)
         {
-            var students = await this.studentService.GetStudentsAsync();
+            var students = await this.courseService.FetchStudentsForCourseAsync(id);
+            ViewBag.CourseId = id;
             return View(students);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStudentsToCourse(int id, string studentId)
+        public async Task<IActionResult> AddStudentsToCourse(int courseId, string studentId)
         {
-            await this.courseService.AddStudentToCourseAsync(id, studentId);
+            try
+            {
+                await this.courseService.EnrollStudentAsync(courseId, studentId);
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = e.Message;
+                return RedirectToAction("AddStudents", new { id = courseId });
+            }
 
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id = courseId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveStudent(int courseId, string studentId)
+        {
+            await this.courseService.UnenrollStudentAsync(courseId, studentId);
+
+            return RedirectToAction("Details", new { id = courseId });
         }
     }
 }
