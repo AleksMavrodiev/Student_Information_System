@@ -123,5 +123,14 @@ namespace StudentInformationSystem.Services.Services
             await this.dbContext.SaveChangesAsync();
             await this.userService.RemoveUserAsync(id);
         }
+
+        public async Task GradeStudentAsync(string studentId, int courseId, int grade)
+        {
+            var course =  await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc =>
+                sc.StudentId.ToString() == studentId && sc.CourseId == courseId);
+
+            course.Grade = grade;
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }

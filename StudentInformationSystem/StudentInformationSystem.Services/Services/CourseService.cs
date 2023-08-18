@@ -45,12 +45,14 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId)
         {
+            StudentCourses sc = await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc => sc.CourseId == courseId);
+
             List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
             {
                 Id = s.StudentId,
                 Name = s.Student.FirstName + " " + s.Student.LastName
             }).ToListAsync();
-            StudentCourses sc = await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc => sc.CourseId == courseId);
+            
             
             CourseDetailsViewModel courseDetails = new CourseDetailsViewModel()
             {

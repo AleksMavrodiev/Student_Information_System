@@ -61,8 +61,12 @@
                     <tr class="student-row" data-student-id="@student.Id">
                         <td>@student.Name</td>
                         <td>
-                            <input type="number" min="0" max="100" step="1" />
-                            <button class="btn btn-primary btn-sm">Save Grade</button>
+                            <form asp-controller="Teacher" asp-action="Grade" method="post">
+                                <input name="grade" runat="server" type="number" min="2" max="6" step="1" />
+                                <input name="studentId" runat="server" type="hidden" value="@student.Id" />
+                                <input name="courseid" runat="server" type="hidden" value="@Model.Id" />
+                                <button type="submit">Save</button>
+                            </form>
                         </td>
                     </tr>
                 }

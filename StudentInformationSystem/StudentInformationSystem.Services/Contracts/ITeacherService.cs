@@ -18,5 +18,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task<TeacherEditViewModel> GetTeacherForEditAsync(string teacherId);
         Task EditTeacherAsync(string id, TeacherEditViewModel model);
         Task DeleteTeacherAsync(string id);
+        Task GradeStudentAsync(string studentId, int courseId, int grade);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentInformationSystem.Services.Contracts;
+using StudentInformationSystem.Web.ViewModels.Student;
 using StudentInformationSystem.Web.ViewModels.Teacher;
 
 namespace StudentInformationSystem.Controllers
@@ -82,6 +83,16 @@ namespace StudentInformationSystem.Controllers
             await this.teacherService.DeleteTeacherAsync(id);
 
             return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Grade()
+        {
+            var studentId = this.Request.Form["studentId"].ToString();
+            var courseId = int.Parse(this.Request.Form["courseId"].ToString());
+            var grade = int.Parse(this.Request.Form["grade"].ToString());
+            await this.teacherService.GradeStudentAsync(studentId, courseId, grade);
+            return RedirectToAction("Details", "Course", new {id = courseId});
         }
     }
 }
