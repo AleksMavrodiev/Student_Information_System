@@ -1,0 +1,66 @@
+﻿@model TeacherAddViewModel
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container mt-4">
+        <h2>Add Teacher</h2>
+        <form asp-action="AddTeacher" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="FirstName">First Name</label>
+                <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" />
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="LastName">Last Name</label>
+                <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" />
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="EGN">EGN</label>
+                <input type="text" class="form-control" id="EGN" name="EGN" value="@Model.EGN" />
+                <span asp-validation-for="EGN" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number</label>
+                <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Teacher</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                $("#errorAlert").removeClass("d-none");
+            }
+
+            $(".alert .close").on("click", function () {
+                $(this).parent().fadeOut(500);
+            });
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+

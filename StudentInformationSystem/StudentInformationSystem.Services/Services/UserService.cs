@@ -31,5 +31,19 @@ namespace StudentInformationSystem.Services.Services
             var user = await this.userManager.FindByIdAsync(userId);
             var result = await this.userManager.AddToRoleAsync(user, roleName);
         }
+
+        public async Task AddTeacherToRoleAsync(string userId)
+        {
+            var roleName = "Teacher";
+            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+
+            if (!roleExists)
+            {
+                await this.roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+
+            var user = await this.userManager.FindByIdAsync(userId);
+            var result = await this.userManager.AddToRoleAsync(user, roleName);
+        }
     }
 }

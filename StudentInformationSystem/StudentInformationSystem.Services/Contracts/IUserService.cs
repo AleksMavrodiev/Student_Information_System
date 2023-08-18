@@ -9,5 +9,6 @@ namespace StudentInformationSystem.Services.Contracts
     public interface IUserService
     {
         Task AddStudentToRoleAsync(string userId);
+        Task AddTeacherToRoleAsync(string userId);
     }
 }

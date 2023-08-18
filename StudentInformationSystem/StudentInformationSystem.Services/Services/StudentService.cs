@@ -64,7 +64,7 @@ namespace StudentInformationSystem.Services.Services
             {
                 Id = student.Id.ToString(),
                 UserName = model.Email,
-                Email = $"{student.FirstName.ToLower()}.{student.LastName.ToLower()}@university.com",
+                Email = model.Email,
                 NormalizedUserName = model.Email.ToUpper(),
             };
 

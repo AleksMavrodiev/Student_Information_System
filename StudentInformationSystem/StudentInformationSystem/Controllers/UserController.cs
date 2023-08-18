@@ -30,5 +30,19 @@ namespace StudentInformationSystem.Controllers
             await this.userService.AddStudentToRoleAsync(user.Id);
             return RedirectToAction("All", "Student");
         }
+
+        [HttpGet]
+        public IActionResult GiveTeacherRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GiveTeacherRole(string username)
+        {
+            var user = await this.userManager.FindByNameAsync(username);
+            await this.userService.AddTeacherToRoleAsync(user.Id);
+            return RedirectToAction("All", "Teacher");
+        }
     }
 }
