@@ -11,5 +11,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task AddStudentToRoleAsync(string userId);
         Task AddTeacherToRoleAsync(string userId);
         Task RemoveUserAsync(string id);
+
     }
 }
