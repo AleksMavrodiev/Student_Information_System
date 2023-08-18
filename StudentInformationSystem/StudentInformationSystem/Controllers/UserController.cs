@@ -40,8 +40,16 @@ namespace StudentInformationSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> GiveTeacherRole(string username)
         {
-            var user = await this.userManager.FindByNameAsync(username);
-            await this.userService.AddTeacherToRoleAsync(user.Id);
+            try
+            {
+                var user = await this.userManager.FindByNameAsync(username);
+                await this.userService.AddTeacherToRoleAsync(user.Id);
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "You need to enter a valid teacher username";
+                return View();
+            }   
             return RedirectToAction("All", "Teacher");
         }
     }

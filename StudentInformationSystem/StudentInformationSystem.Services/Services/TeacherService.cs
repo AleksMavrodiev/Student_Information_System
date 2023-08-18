@@ -17,10 +17,12 @@ namespace StudentInformationSystem.Services.Services
     public class TeacherService : ITeacherService
     {
         private readonly StudentInformationDbContext dbContext;
+        private readonly IUserService userService;
 
-        public TeacherService(StudentInformationDbContext dbContext)
+        public TeacherService(StudentInformationDbContext dbContext, IUserService userService)
         {
             this.dbContext = dbContext;
+            this.userService = userService;
         }
         public async Task<IEnumerable<TeacherListViewModel>> GetTeachersForListItemAsync()
         {
@@ -119,6 +121,7 @@ namespace StudentInformationSystem.Services.Services
             var teacher = this.dbContext.Teachers.FirstOrDefault(t => t.Id.ToString() == id);
             this.dbContext.Teachers.Remove(teacher);
             await this.dbContext.SaveChangesAsync();
+            await this.userService.RemoveUserAsync(id);
         }
     }
 }

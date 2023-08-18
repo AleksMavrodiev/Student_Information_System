@@ -29,8 +29,8 @@ namespace StudentInformationSystem.Web.ViewModels.Teacher
         public string PhoneNumber { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
+        public string? UserId { get; set; } 
 
-        public virtual IdentityUser User { get; set; }
+        public virtual IdentityUser? User { get; set; }
     }
 }
