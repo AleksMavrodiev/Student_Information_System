@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CourseScheduleViewModel>
+
+@{
+    ViewData["Title"] = "Student Schedule";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .schedule-table th, .schedule-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+
+            .schedule-table th {
+                background-color: #007BFF;
+                color: #fff;
+            }
+
+        .filled-cell {
+            background-color: #86DF4C;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>@ViewData["Title"]</h1>
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < 24; i++)
+                {
+                    <tr>
+                        <td>@i:00 - @(i + 1):00</td>
+                        @for (int j = 1; j <= 5; j++)
+                        {
+                            var classForTime = Model.FirstOrDefault(c => (int)c.DayOfWeek == j && c.Start.Hour == i);
+                            <td @if (classForTime != null)
+                            {
+                                <text>class="filled-cell"</text>
+                            }>
+                                @if (classForTime != null)
+                                {
+                                <strong>@classForTime.Name</strong>
+                                <br></br>
+                                <div>
+                                    @classForTime.Start.ToString("HH:mm")
+                                    -@classForTime.End.ToString("HH:mm")
+                                </div>
+                                <br></br>
+                                <div class="selector">
+                                    Lecture room: @classForTime.LectureRoom
+                                </div>
+                                <script>
+                                    let elements = document.getElementsByClassName("selector");
+                                    for (let i = 0; i < elements.length; i++) {
+                                        elements[i].parentElement.classList.add("active-course");
+                                    }
+                                </script>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

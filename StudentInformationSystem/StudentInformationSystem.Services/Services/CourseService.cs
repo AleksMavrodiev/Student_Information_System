@@ -179,5 +179,17 @@ namespace StudentInformationSystem.Services.Services
             }).ToArrayAsync();
 
         }
+
+        public async Task<IEnumerable<CourseScheduleViewModel>> GetTeacherScheduleAsync(string teacherId)
+        {
+            return await this.dbContext.Courses.Where(c => c.TeacherId.ToString() == teacherId).Select(c => new CourseScheduleViewModel()
+            {
+                Name = c.Name,
+                DayOfWeek = c.DayOfWeek,
+                Start = c.Start,
+                End = c.End,
+                LectureRoom = c.LectureRoom
+            }).ToArrayAsync();
+        }
     }
 }
