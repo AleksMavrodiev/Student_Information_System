@@ -17,10 +17,12 @@ namespace StudentInformationSystem.Services.Services
     public class StudentService : IStudentService
     {
         private readonly StudentInformationDbContext dbcontext;
+        private readonly IUserService userService;
 
-        public StudentService(StudentInformationDbContext dbContext)
+        public StudentService(StudentInformationDbContext dbContext, IUserService userService)
         {
             this.dbcontext = dbContext;
+            this.userService = userService;
         }
 
 
@@ -117,14 +119,43 @@ namespace StudentInformationSystem.Services.Services
             };
         }
 
-        public Task<Student> UpdateStudentAsync(Student student)
+        public async Task UpdateStudentAsync(string id, StudentEditViewModel student)
         {
-            throw new NotImplementedException();
+            var studentToUpdate = await this.GetStudentAsync(id);
+            studentToUpdate.FirstName = student.FirstName;
+            studentToUpdate.LastName = student.LastName;
+            studentToUpdate.FacultyNumber = student.FacultyNumber;
+            studentToUpdate.PhoneNumber = student.PhoneNumber;
+            studentToUpdate.Email = student.Email;
+            studentToUpdate.EGN = student.EGN;
+            studentToUpdate.IsActive = student.IsActive;
+            studentToUpdate.IsForeign = student.IsForeign;
+            studentToUpdate.SpecialtyId = student.SpecialtyId;
+
+            await this.dbcontext.SaveChangesAsync();
         }
 
-        public Task DeleteStudentAsync(int id)
+        public async Task DeleteStudentAsync(string id)
         {
-            throw new NotImplementedException();
+            var student = await this.GetStudentAsync(id);
+            this.dbcontext.Remove(student);
+            await this.userService.RemoveUserAsync(id);
+        }
+
+        public async Task<StudentEditViewModel> GetStudentEditAsync(string id)
+        {
+            var student = await this.GetStudentAsync(id);
+            var studentToEdit = new StudentEditViewModel()
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                FacultyNumber = student.FacultyNumber,
+                PhoneNumber = student.PhoneNumber,
+                Email = student.Email,
+                EGN = student.EGN,
+            };
+
+            return studentToEdit;
         }
     }
 }

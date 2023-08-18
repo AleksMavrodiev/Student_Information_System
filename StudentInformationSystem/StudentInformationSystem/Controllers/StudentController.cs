@@ -86,5 +86,25 @@ namespace StudentInformationSystem.Controllers
             await this.studentService.RemoveStudentProfilePictureAsync(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             return RedirectToAction("MyProfile");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var student = await this.studentService.GetStudentEditAsync(id);
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, StudentEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.studentService.UpdateStudentAsync(id, model);
+
+            return this.RedirectToAction("All");
+        }
     }
 }

@@ -1,0 +1,86 @@
+﻿@model StudentEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label>First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Last Name</label>
+        <textarea asp-for="LastName" class="form-control"></textarea>
+        <span asp-validation-for="LastName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>EGN</label>
+        <input asp-for="EGN" class="form-control" />
+        <span asp-validation-for="EGN" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Faculty number</label>
+        <input asp-for="FacultyNumber" class="form-control" />
+        <span asp-validation-for="FacultyNumber" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+        <label class="form-check-label" for="IsActive">Active</label>
+        <span asp-validation-for="IsActive" class="small text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="IsForeign" name="IsForeign" value="true" @(Model.IsForeign ? "checked" : "") />
+        <label class="form-check-label" for="IsForeign">Foreign</label>
+        <span asp-validation-for="IsForeign" class="small text-danger"></span>
+    </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="SpecialtyId"></label>
+        <select asp-for="SpecialtyId" class="form-control">
+            @foreach (var specialty in Model.Specialties)
+            {
+                <option value="@specialty.Id">@specialty.Name</option>
+            }
+        </select>
+        <span asp-validation-for="SpecialtyId" class="small text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                $("#errorAlert").removeClass("d-none");
+            }
+
+            $(".alert .close").on("click", function () {
+                $(this).parent().fadeOut(500);
+            });
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

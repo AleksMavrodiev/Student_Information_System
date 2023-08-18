@@ -17,7 +17,8 @@ namespace StudentInformationSystem.Services.Contracts
         Task RemoveStudentProfilePictureAsync(string userId);
         Task SaveStudentProfilePictureAsync(string userId, IFormFile profilePicture);
         Task<StudentProfileViewModel> GetStudentProfileAsync(string userId);
-        Task<Student> UpdateStudentAsync(Student student);
-        Task DeleteStudentAsync(int id);
+        Task UpdateStudentAsync(string id, StudentEditViewModel student);
+        Task DeleteStudentAsync(string id);
+        Task<StudentEditViewModel> GetStudentEditAsync(string id);
     }
 }
