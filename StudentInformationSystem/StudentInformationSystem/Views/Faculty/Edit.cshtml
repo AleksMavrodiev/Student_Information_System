@@ -1,0 +1,60 @@
+﻿@model EditFacultyViewModel
+
+@{
+    ViewData["Title"] = "Add Faculty";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="Description" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UniversityId"></label>
+        <select asp-for="UniversityId" class="form-control">
+            @foreach (var university in Model.Universities)
+            {
+                <option value="@university.Id">@university.Name</option>
+            }
+        </select>
+        <span asp-validation-for="UniversityId" class="small text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                $("#errorAlert").removeClass("d-none");
+            }
+
+            $(".alert .close").on("click", function () {
+                $(this).parent().fadeOut(500);
+            });
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

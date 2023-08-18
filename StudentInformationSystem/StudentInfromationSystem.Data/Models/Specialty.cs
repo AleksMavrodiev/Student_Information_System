@@ -24,6 +24,12 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         public int FacultyId { get; set; }
 
+        [NotMapped]
+        public int CourseCount => Courses.Count;
+
+        [NotMapped]
+        public int StudentCount => Students.Count;
+
         public virtual Faculty Faculty { get; set; } = null!;
 
         public virtual ICollection<Course> Courses { get; set; } 

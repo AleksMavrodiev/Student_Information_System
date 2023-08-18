@@ -16,5 +16,6 @@ namespace StudentInformationSystem.Services.Contracts
         public Task<UniversityEditViewModel> GetUniversityEditViewModelById(int id);
         public Task Edit(int id, UniversityEditViewModel universityEditViewModel);
         public Task Delete(int id);
+        public Task<IEnumerable<UniversityListViewModel>> GetUniversitiesForDropDownAsync();
     }
 }

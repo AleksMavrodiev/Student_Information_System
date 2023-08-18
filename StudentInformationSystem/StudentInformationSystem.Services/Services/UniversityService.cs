@@ -78,5 +78,14 @@ namespace StudentInformationSystem.Services.Services
             this.dbContext.Universities.Remove(university);
             await this.dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<UniversityListViewModel>> GetUniversitiesForDropDownAsync()
+        {
+            return await this.dbContext.Universities.Select(u => new UniversityListViewModel
+            {
+                Id = u.Id,
+                Name = u.Name
+            }).ToArrayAsync();
+        }
     }
 }

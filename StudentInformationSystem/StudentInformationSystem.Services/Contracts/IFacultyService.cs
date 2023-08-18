@@ -10,5 +10,11 @@ namespace StudentInformationSystem.Services.Contracts
     public interface IFacultyService
     {
         Task<IList<ShowAllFacultiesViewModel>> ShowAllFacultiesForUniversity(int universityId);
+
+        Task AddFaculty(AddFacultyViewModel model);
+
+        Task<EditFacultyViewModel> PrepareForEditFaculty(int id);
+        Task EditFaculty(int id, EditFacultyViewModel model);
+        Task DeleteFaculty(int id);
     }
 }
