@@ -61,5 +61,11 @@ namespace StudentInformationSystem.Services.Services
         {
             return await this.userManager.FindByIdAsync(id);
         }
+
+        public async Task ChangeUserStatus(ApplicationUser user)
+        {
+            user.PasswordRequiredChange = false;
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }

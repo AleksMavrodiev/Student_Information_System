@@ -22,6 +22,8 @@ namespace StudentInformationSystem.Controllers
             this.courseService = courseService;
             this.teacherService = teacherService;
         }
+
+        [Authorize(Roles = "Admin,Student")]
         public async Task<IActionResult> ShowMine()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -31,6 +33,7 @@ namespace StudentInformationSystem.Controllers
             return View(courses);
         }
 
+        [Authorize(Roles = "Admin,Student")]
         public async Task<IActionResult> Schedule()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -47,6 +50,7 @@ namespace StudentInformationSystem.Controllers
             return View(courseDetails);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var course = await this.courseService.GetCourseForEditAsync(id);
@@ -57,6 +61,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, EditCourseViewModel model)
         {
             if (!ModelState.IsValid)
@@ -88,6 +93,7 @@ namespace StudentInformationSystem.Controllers
             return View(courses);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -98,6 +104,7 @@ namespace StudentInformationSystem.Controllers
             return View(course);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Add(EditCourseViewModel model)
         {
@@ -122,6 +129,7 @@ namespace StudentInformationSystem.Controllers
             return RedirectToAction("ShowAll");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             await this.courseService.DeleteCourseAsync(id);
@@ -129,6 +137,7 @@ namespace StudentInformationSystem.Controllers
             return RedirectToAction("ShowAll");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddStudents(int id)
         {
             var students = await this.courseService.FetchStudentsForCourseAsync(id);
@@ -136,6 +145,7 @@ namespace StudentInformationSystem.Controllers
             return View(students);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddStudentsToCourse(int courseId, string studentId)
         {
@@ -153,6 +163,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveStudent(int courseId, string studentId)
         {
             await this.courseService.UnenrollStudentAsync(courseId, studentId);

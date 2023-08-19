@@ -36,42 +36,49 @@
 
         <!-- Students and Grading tab content -->
         <div id="students" class="tab-pane fade">
-            <h3>Student List</h3>
-            <div class="form-group">
-                <input type="text" id="studentSearch" class="form-control" placeholder="Search for students" />
-            </div>
-            <ul id="studentList">
-                @foreach (var student in Model.Students)
-                {
-                    <li data-student-id="@student.Id">@student.Name</li>
-                }
-            </ul>
+            @if (User.IsInRole("Student") || User.IsInRole("Admin"))
+            {
+                <h3>Student List</h3>
+                <div class="form-group">
+                    <input type="text" id="studentSearch" class="form-control" placeholder="Search for students" />
+                </div>
+                <ul id="studentList">
+                    @foreach (var student in Model.Students)
+                    {
+                        <li data-student-id="@student.Id">@student.Name</li>
+                    }
+                </ul>
+            }
 
-            <h3>Grading</h3>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Grade</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var student in Model.Students)
-                {
-                    <tr class="student-row" data-student-id="@student.Id">
-                        <td>@student.Name</td>
-                        <td>
-                            <form asp-controller="Teacher" asp-action="Grade" method="post">
-                                <input name="grade" runat="server" type="number" min="2" max="6" step="1" />
-                                <input name="studentId" runat="server" type="hidden" value="@student.Id" />
-                                <input name="courseid" runat="server" type="hidden" value="@Model.Id" />
-                                <button type="submit">Save</button>
-                            </form>
-                        </td>
+            @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
+            {
+                <h3>Grading</h3>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Grade</th>
                     </tr>
-                }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach (var student in Model.Students)
+                    {
+                        <tr class="student-row" data-student-id="@student.Id">
+                            <td>@student.Name</td>
+                            <td>
+                                <form asp-controller="Teacher" asp-action="Grade" method="post">
+                                    <input name="grade" runat="server" type="number" min="2" max="6" step="1" />
+                                    <input name="studentId" runat="server" type="hidden" value="@student.Id" />
+                                    <input name="courseid" runat="server" type="hidden" value="@Model.Id" />
+                                    <button type="submit">Save</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+               
+            }
         </div>
 
         <!-- Homework tab content -->

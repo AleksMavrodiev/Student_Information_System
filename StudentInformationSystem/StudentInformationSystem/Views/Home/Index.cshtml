@@ -41,49 +41,52 @@
         <h3>Quick Links</h3>
         <div class="row">
             <div class="col-md-6">
-                <a class="btn btn-primary btn-block" href="/Students">View All Students</a>
+                <a class="btn btn-primary btn-block" asp-controller="Student" asp-action="All">View All Students</a>
             </div>
             <div class="col-md-6">
-                <a class="btn btn-success btn-block" href="/Students/Add">Add New Student</a>
+                <a class="btn btn-success btn-block" asp-controller="Teacher" asp-action="All">View All Teachers</a>
             </div>
         </div>
         
-        <div class="panel">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Admin Panel</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Student" asp-action="All">View All Students</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="University" asp-action="Create">Add University</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Course" asp-action="ShowAll">List All Courses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Teacher" asp-action="AddTeacher">Add Teacher</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Student" asp-action="Add">Add Student</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Teacher" asp-action="All">All Teachers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Add">Add Course</a>
-                            </li>
-                        </ul>
+        @if (@User.IsInRole("Admin"))
+        {
+            <div class="panel">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">Admin Panel</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="GiveStudentRole">Add Student to Role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="University" asp-action="Create">Add University</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Course" asp-action="ShowAll">List All Courses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Teacher" asp-action="AddTeacher">Add Teacher</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Student" asp-action="Add">Add Student</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="GiveTeacherRole">Add Teacher To Role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Add">Add Course</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
-        </div>
+                </nav>
+            </div>
+        }
     </div>
 </body>
 </html>

@@ -12,7 +12,10 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Actions</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Actions</th>
+            }
         </tr>
         </thead>
         <tbody>
@@ -22,10 +25,13 @@
                 <td>@teacher.FirstName</td>
                 <td>@teacher.LastName</td>
                 <td>@teacher.PhoneNumber</td>
-                <td>
-                    <a asp-controller="Teacher" asp-action="Edit" asp-route-id="@teacher.Id" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-controller="Teacher" asp-action="Delete" asp-route-id="@teacher.Id" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-controller="Teacher" asp-action="Edit" asp-route-id="@teacher.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-controller="Teacher" asp-action="Delete" asp-route-id="@teacher.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                }
             </tr>
         }
         </tbody>

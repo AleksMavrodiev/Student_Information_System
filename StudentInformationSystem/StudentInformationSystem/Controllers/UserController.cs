@@ -23,12 +23,14 @@ namespace StudentInformationSystem.Controllers
         }                          
             
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult GiveStudentRole()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GiveStudentRole(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);
@@ -37,12 +39,14 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult GiveTeacherRole()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GiveTeacherRole(string username)
         {
             try
@@ -84,7 +88,7 @@ namespace StudentInformationSystem.Controllers
 
                         if (changePasswordResult.Succeeded)
                         {
-                            user.PasswordRequiredChange = false;
+                            await this.userService.ChangeUserStatus(user);
                             await this.signInManager.SignInAsync(user, isPersistent: false);
                             return RedirectToAction("Index", "Home");
                         }

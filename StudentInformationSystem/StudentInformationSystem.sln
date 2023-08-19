@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInfromationSystem.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Common", "StudentInformationSystem.Common\StudentInformationSystem.Common.csproj", "{FA5FC47D-C928-46E9-9F7F-97C47B1819C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentInfromationSystem.Web.Infrastructure", "StudentInfromationSystem.Web.Infrastructure\StudentInfromationSystem.Web.Infrastructure.csproj", "{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInfromationSystem.Web.Infrastructure", "StudentInfromationSystem.Web.Infrastructure\StudentInfromationSystem.Web.Infrastructure.csproj", "{97DFE8D1-8137-4A8E-A9CF-20EA43E34FA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

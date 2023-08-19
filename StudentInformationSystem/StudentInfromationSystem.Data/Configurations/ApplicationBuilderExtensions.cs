@@ -23,13 +23,11 @@ namespace StudentInfromationSystem.Data.Configurations
             const string adminRole = "Admin";
             Task.Run(async () =>
             {
-                if (await roleManager.RoleExistsAsync(adminRole))
+                if (!await roleManager.RoleExistsAsync(adminRole))
                 {
-                    return;
+                    var role = new IdentityRole { Name = adminRole };
+                    await roleManager.CreateAsync(role);
                 }
-
-                var role = new IdentityRole { Name = adminRole };
-                await roleManager.CreateAsync(role);
 
                 var adminUser = await userManager.FindByEmailAsync("admin@mail.com");
                 await userManager.AddToRoleAsync(adminUser, adminRole);

@@ -17,6 +17,8 @@ namespace StudentInformationSystem.Controllers
             this.courseService = courseService;
             this.teacherService = teacherService;
         }
+
+        [Authorize(Roles = "Admin,Teacher")]
         public async Task<IActionResult> MySchedule()
         {
             var courses = await this.courseService.GetTeacherScheduleAsync(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -25,6 +27,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddTeacher()
         {
             var teacherModel = new TeacherAddViewModel();
@@ -32,6 +35,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddTeacher(TeacherAddViewModel model)
         {
             if (!ModelState.IsValid)
@@ -51,6 +55,7 @@ namespace StudentInformationSystem.Controllers
             return this.View(teachers);
         }
 
+        [Authorize(Roles = "Admin,Teacher")]
         public async Task<IActionResult> MyCourses()
         {
             var courses = await this.teacherService.GetTeacherCoursesAsync(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -59,6 +64,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id)
         {
             var teacher = await this.teacherService.GetTeacherForEditAsync(id);
@@ -66,6 +72,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id, TeacherEditViewModel model)
         {
             if (!ModelState.IsValid)
@@ -78,6 +85,7 @@ namespace StudentInformationSystem.Controllers
             return this.RedirectToAction("All");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             await this.teacherService.DeleteTeacherAsync(id);
@@ -86,6 +94,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Teacher")]
         public async Task<IActionResult> Grade()
         {
             var studentId = this.Request.Form["studentId"].ToString();

@@ -27,6 +27,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add()
         {
             var studentModel = new StudentAddViewModel();
@@ -35,6 +36,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add(StudentAddViewModel model)
         {
             if (!ModelState.IsValid)
@@ -48,12 +50,14 @@ namespace StudentInformationSystem.Controllers
             return this.RedirectToAction("All");
         }
 
+        [Authorize(Roles = "Admin,Student")]
         public async Task<IActionResult> MyProfile()
         {
             var student = await this.studentService.GetStudentProfileAsync(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View(student);
         }
 
+        [Authorize(Roles = "Student")]
         [HttpPost]
         public async Task<IActionResult> UploadProfilePicture(IFormFile profilePicture)
         {
@@ -81,6 +85,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> RemoveProfilePicture()
         {
             await this.studentService.RemoveStudentProfilePictureAsync(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -88,6 +93,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id)
         {
             var student = await this.studentService.GetStudentEditAsync(id);
@@ -95,6 +101,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id, StudentEditViewModel model)
         {
             if (!ModelState.IsValid)
@@ -108,6 +115,7 @@ namespace StudentInformationSystem.Controllers
             return this.RedirectToAction("All");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             await this.studentService.DeleteStudentAsync(id);

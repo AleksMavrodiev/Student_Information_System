@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Web.ViewModels.Faculty;
 
@@ -24,6 +25,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add()
         {
             var specialty = new AddFacultyViewModel();
@@ -32,6 +34,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add(AddFacultyViewModel model)
         {
             await this.facultyService.AddFaculty(model);
@@ -39,6 +42,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var faculty = await this.facultyService.PrepareForEditFaculty(id);
@@ -46,6 +50,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, EditFacultyViewModel model)
         {
             if (!ModelState.IsValid)
@@ -58,6 +63,7 @@ namespace StudentInformationSystem.Controllers
             return RedirectToAction("ShowAll", "University");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             await this.facultyService.DeleteFaculty(id);

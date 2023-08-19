@@ -22,6 +22,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var universityCreateViewModel = new UniversityCreateViewModel();
@@ -29,6 +30,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(UniversityCreateViewModel universityCreateViewModel)
         {
             if (!ModelState.IsValid)
@@ -41,6 +43,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var universityEditViewModel = await this.universityService.GetUniversityEditViewModelById(id);
@@ -48,6 +51,7 @@ namespace StudentInformationSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, UniversityEditViewModel universityEditViewModel)
         {
             if (!ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace StudentInformationSystem.Controllers
             return RedirectToAction("ShowAll");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             await this.universityService.Delete(id);

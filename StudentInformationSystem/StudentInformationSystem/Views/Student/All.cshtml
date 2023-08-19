@@ -16,7 +16,10 @@
             <th>Faculty Number</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Actions</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Actions</th>
+            }
         </tr>
         </thead>
         <tbody>
@@ -26,10 +29,13 @@
                 <td>@student.FacultyNumber</td>
                 <td>@student.FirstName</td>
                 <td>@student.LastName</td>
-                <td>
-                    <a asp-area="" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
-                    <a asp-area="" asp-controller="Student" asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a>
-                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-area="" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+                        <a asp-area="" asp-controller="Student" asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                }
             </tr>
         }
         </tbody>
