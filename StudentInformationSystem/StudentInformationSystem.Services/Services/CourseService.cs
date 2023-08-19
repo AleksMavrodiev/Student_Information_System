@@ -79,7 +79,7 @@ namespace StudentInformationSystem.Services.Services
                 DayOfWeek = course.DayOfWeek,
                 Start = course.Start,
                 End = course.End,
-                TeacherId = course.TeacherId,
+                TeacherId = (Guid)course.TeacherId,
                 SpecialtyId = course.SpecialtyId
             };
         }

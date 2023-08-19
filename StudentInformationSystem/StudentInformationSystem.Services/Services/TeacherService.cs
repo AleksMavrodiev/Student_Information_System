@@ -19,11 +19,13 @@ namespace StudentInformationSystem.Services.Services
     {
         private readonly StudentInformationDbContext dbContext;
         private readonly IUserService userService;
+        private readonly IEmailService emailService;
 
-        public TeacherService(StudentInformationDbContext dbContext, IUserService userService)
+        public TeacherService(StudentInformationDbContext dbContext, IUserService userService, IEmailService emailService)
         {
             this.dbContext = dbContext;
             this.userService = userService;
+            this.emailService = emailService;
         }
         public async Task<IEnumerable<TeacherListViewModel>> GetTeachersForListItemAsync()
         {
@@ -58,11 +60,20 @@ namespace StudentInformationSystem.Services.Services
                 LastName = model.LastName,
                 EGN = model.EGN,
                 PhoneNumber = model.PhoneNumber,
+                PasswordRequiredChange = true
             };
 
             teacher.User.PasswordHash = passwordHasher.HashPassword(teacher.User, initialPassword);
             await this.dbContext.Teachers.AddAsync(teacher);
             await this.dbContext.SaveChangesAsync();
+
+            var subject = "Welcome to Our Application";
+            var message = $"Hello {teacher.User.UserName},<br />"
+                          + $"Your email: {teacher.User.Email}<br />"
+                          + $"Your initial password: {initialPassword}<br />"
+                          + "Please login and change your password.";
+
+            await this.emailService.SendEmailAsync(teacher.User.Email, subject, message, teacher.User.UserName);
         }
 
         public async Task<IEnumerable<TeacherAllViewModel>> GetAllTeachersAsync()

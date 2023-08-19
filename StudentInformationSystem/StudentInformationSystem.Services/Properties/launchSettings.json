@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "StudentInformationSystem.Services": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "EmailSender": "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"
+      }
+    }
+  }
+}

@@ -20,12 +20,14 @@ namespace StudentInformationSystem.Services.Services
         private readonly StudentInformationDbContext dbcontext;
         private readonly IUserService userService;
         private readonly ISpecialtyService specialtyService;
+        private readonly IEmailService emailService;
 
-        public StudentService(StudentInformationDbContext dbContext, IUserService userService, ISpecialtyService specialtyService)
+        public StudentService(StudentInformationDbContext dbContext, IUserService userService, ISpecialtyService specialtyService, IEmailService emailService)
         {
             this.dbcontext = dbContext;
             this.userService = userService;
             this.specialtyService = specialtyService;
+            this.emailService = emailService;
         }
 
 
@@ -71,6 +73,7 @@ namespace StudentInformationSystem.Services.Services
                 EGN = model.EGN,
                 PhoneNumber = model.PhoneNumber,
                 ProfilePicture = model.ProfilePicture,
+                PasswordRequiredChange = true
             };
 
             student.UserId = student.User.Id;
@@ -78,6 +81,14 @@ namespace StudentInformationSystem.Services.Services
 
             await this.dbcontext.Students.AddAsync(student);
             await this.dbcontext.SaveChangesAsync();
+
+            var subject = "Welcome to Our Application";
+            var message = $"Hello {student.User.UserName},<br />"
+                          + $"Your email: {student.User.Email}<br />"
+                          + $"Your initial password: {initialPassword}<br />"
+                          + "Please login and change your password.";
+
+            await this.emailService.SendEmailAsync(student.User.Email, subject, message, student.User.UserName);
         }
 
         public async Task RemoveStudentProfilePictureAsync(string userId)

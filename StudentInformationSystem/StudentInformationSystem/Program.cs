@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Mail;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +38,7 @@ internal class Program
             
 
         builder.Services.AddControllersWithViews();
-        
+        builder.Services.AddSingleton<IEmailService, EmailService>();
         builder.Services.AddScoped<IUniversityService, UniversityService>();
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<IFacultyService, FacultyService>();
@@ -44,6 +46,17 @@ internal class Program
         builder.Services.AddScoped<ITeacherService, TeacherService>();
         builder.Services.AddScoped<IStudentService, StudentService>(); ;
         builder.Services.AddScoped<IUserService, UserService>();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
+        
 
         var app = builder.Build();
 
