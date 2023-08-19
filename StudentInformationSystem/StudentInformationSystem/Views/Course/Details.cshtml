@@ -27,14 +27,11 @@
         </li>
     </ul>
 
-    <!-- Tab content -->
     <div class="tab-content mt-4">
-        <!-- Description tab content -->
         <div id="description" class="tab-pane fade show active">
             <p>@Model.Description</p>
         </div>
 
-        <!-- Students and Grading tab content -->
         <div id="students" class="tab-pane fade">
             @if (User.IsInRole("Student") || User.IsInRole("Admin"))
             {
@@ -80,22 +77,10 @@
                
             }
         </div>
-
-        <!-- Homework tab content -->
-        <div id="homework" class="tab-pane fade">
-            <h3>Homework Submission</h3>
-            <form enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="file" name="file" />
-                    <button type="submit" class="btn btn-primary">Submit Homework</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 
 <script>
-    // JavaScript code for filtering students
     $(document).ready(function () {
         $("#studentSearch").on("keyup", function () {
             var input, filter, ul, li, a, i, txtValue;

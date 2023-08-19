@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -76,15 +77,24 @@ namespace StudentInformationSystem.Services.Services
             await this.emailService.SendEmailAsync(teacher.User.Email, subject, message, teacher.User.UserName);
         }
 
-        public async Task<IEnumerable<TeacherAllViewModel>> GetAllTeachersAsync()
+        public async Task<IEnumerable<TeacherAllViewModel>> GetAllTeachersAsync(string search)
         {
-            return await this.dbContext.Teachers.Select(t => new TeacherAllViewModel()
+            var teachers = this.dbContext.Teachers.AsQueryable();
+
+            if (!search.IsNullOrEmpty())
+            {
+                teachers = teachers.Where(t => t.User.FirstName.Contains(search) || t.User.LastName.Contains(search));
+            }
+
+            var viewModel = await teachers.Select(t => new TeacherAllViewModel()
             {
                 Id = t.Id.ToString(),
                 FirstName = t.User.FirstName,
                 LastName = t.User.LastName,
                 PhoneNumber = t.User.PhoneNumber
             }).ToArrayAsync();
+
+            return viewModel;
         }
 
         public async Task<IEnumerable<TeacherCoursesViewModel>> GetTeacherCoursesAsync(string teacherId)

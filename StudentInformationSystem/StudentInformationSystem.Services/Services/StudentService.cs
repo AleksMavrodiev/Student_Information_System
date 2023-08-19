@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,15 +32,23 @@ namespace StudentInformationSystem.Services.Services
         }
 
 
-        public async Task<IEnumerable<StudentAllViewModel>> GetStudentsAsync()
+        public async Task<IEnumerable<StudentAllViewModel>> GetStudentsAsync(string search)
         {
-            return await this.dbcontext.Students.Select(x => new StudentAllViewModel
+            var students = this.dbcontext.Students.AsQueryable();
+            if (!search.IsNullOrEmpty())
+            {
+                students = students.Where(x => x.User.FirstName.Contains(search) || x.User.LastName.Contains(search));
+            }
+
+            var viewModel = await students.Select(x => new StudentAllViewModel
             {
                 Id = x.Id.ToString(),
                 FirstName = x.User.FirstName,
                 LastName = x.User.LastName,
-                FacultyNumber = x.FacultyNumber
+                FacultyNumber = x.FacultyNumber,
             }).ToArrayAsync();
+
+            return viewModel;
         }
 
         public async Task<Student> GetStudentAsync(string id)

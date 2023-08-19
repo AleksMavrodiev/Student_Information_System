@@ -5,6 +5,12 @@
 
 <div class="container">
     <h2 class="my-4">All Teachers</h2>
+    <div class="mb-3">
+        <form asp-controller="Teacher" asp-action="All" method="get" class="form-inline">
+            <input type="text" name="search" placeholder="Search by Name" class="form-control mr-sm-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">

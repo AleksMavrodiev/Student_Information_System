@@ -11,7 +11,7 @@ namespace StudentInformationSystem.Services.Contracts
 {
     public interface IStudentService
     {
-        Task<IEnumerable<StudentAllViewModel>> GetStudentsAsync();
+        Task<IEnumerable<StudentAllViewModel>> GetStudentsAsync(string search);
         Task<Student> GetStudentAsync(string id);
         Task CreateStudentAsync(StudentAddViewModel student);
         Task RemoveStudentProfilePictureAsync(string userId);

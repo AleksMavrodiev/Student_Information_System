@@ -48,9 +48,9 @@ namespace StudentInformationSystem.Controllers
             return this.RedirectToAction("All");
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string search)
         {
-            var teachers = await this.teacherService.GetAllTeachersAsync();
+            var teachers = await this.teacherService.GetAllTeachersAsync(search);
 
             return this.View(teachers);
         }

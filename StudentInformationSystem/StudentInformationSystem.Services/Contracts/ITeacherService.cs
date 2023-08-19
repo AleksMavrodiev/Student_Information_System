@@ -13,7 +13,7 @@ namespace StudentInformationSystem.Services.Contracts
     {
         Task<IEnumerable<TeacherListViewModel>> GetTeachersForListItemAsync();
         Task AddTeacherAsync(TeacherAddViewModel model);
-        Task<IEnumerable<TeacherAllViewModel>> GetAllTeachersAsync();
+        Task<IEnumerable<TeacherAllViewModel>> GetAllTeachersAsync(string search);
         Task<IEnumerable<TeacherCoursesViewModel>> GetTeacherCoursesAsync(string teacherId);
         Task<TeacherEditViewModel> GetTeacherForEditAsync(string teacherId);
         Task EditTeacherAsync(string id, TeacherEditViewModel model);

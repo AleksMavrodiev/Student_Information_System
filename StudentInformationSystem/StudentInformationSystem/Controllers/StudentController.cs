@@ -19,9 +19,9 @@ namespace StudentInformationSystem.Controllers
             this.specialtyService = specialtyService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string search)
         {
-            var students = await this.studentService.GetStudentsAsync();
+            var students = await this.studentService.GetStudentsAsync(search);
 
             return this.View(students);
         }
