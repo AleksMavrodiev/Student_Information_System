@@ -11,6 +11,7 @@ using StudentInformationSystem.Data.Models;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Web.ViewModels.Course;
 using StudentInformationSystem.Web.ViewModels.Teacher;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Services.Services
 {
@@ -29,7 +30,7 @@ namespace StudentInformationSystem.Services.Services
             var teachers = await this.dbContext.Teachers.Select(t => new TeacherListViewModel()
             {
                 Id = t.Id.ToString(),
-                FullName = t.FirstName + " " + t.LastName,
+                FullName = t.User.FirstName + " " + t.User.LastName,
             }).ToArrayAsync();
 
             
@@ -39,25 +40,24 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task AddTeacherAsync(TeacherAddViewModel model)
         {
-            var passwordHasher = new PasswordHasher<IdentityUser>();
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
             string initialPassword = "123456";
 
             var teacher = new Teacher()
             {
                 Id = Guid.NewGuid(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                EGN = model.EGN,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
             };
 
-            teacher.User = new IdentityUser()
+            teacher.User = new ApplicationUser()
             {
                 UserName = model.Email,
                 Email = model.Email,
                 Id = teacher.Id.ToString(),
-                NormalizedUserName = model.Email.ToUpper()
+                NormalizedUserName = model.Email.ToUpper(),
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                EGN = model.EGN,
+                PhoneNumber = model.PhoneNumber,
             };
 
             teacher.User.PasswordHash = passwordHasher.HashPassword(teacher.User, initialPassword);
@@ -70,9 +70,9 @@ namespace StudentInformationSystem.Services.Services
             return await this.dbContext.Teachers.Select(t => new TeacherAllViewModel()
             {
                 Id = t.Id.ToString(),
-                FirstName = t.FirstName,
-                LastName = t.LastName,
-                PhoneNumber = t.PhoneNumber
+                FirstName = t.User.FirstName,
+                LastName = t.User.LastName,
+                PhoneNumber = t.User.PhoneNumber
             }).ToArrayAsync();
         }
 
@@ -92,11 +92,11 @@ namespace StudentInformationSystem.Services.Services
             var teacherForEdit = new TeacherEditViewModel()
             {
                 Id = teacher.Id.ToString(),
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                EGN = teacher.EGN,
-                Email = teacher.Email,
-                PhoneNumber = teacher.PhoneNumber
+                FirstName = teacher.User.FirstName,
+                LastName = teacher.User.LastName,
+                EGN = teacher.User.EGN,
+                Email = teacher.User.Email,
+                PhoneNumber = teacher.User.PhoneNumber
             };
 
             return teacherForEdit;
@@ -106,11 +106,11 @@ namespace StudentInformationSystem.Services.Services
         {
             var teacher = this.dbContext.Teachers.FirstOrDefault(t => t.Id.ToString() == id);
 
-            teacher.FirstName = model.FirstName;
-            teacher.LastName = model.LastName;
-            teacher.EGN = model.EGN;
-            teacher.Email = model.Email;
-            teacher.PhoneNumber = model.PhoneNumber;
+            teacher.User.FirstName = model.FirstName;
+            teacher.User.LastName = model.LastName;
+            teacher.User.EGN = model.EGN;
+            teacher.User.Email = model.Email;
+            teacher.User.PhoneNumber = model.PhoneNumber;
 
             this.dbContext.Teachers.Update(teacher); 
             await this.dbContext.SaveChangesAsync();
@@ -120,6 +120,12 @@ namespace StudentInformationSystem.Services.Services
         {
             var teacher = this.dbContext.Teachers.FirstOrDefault(t => t.Id.ToString() == id);
             this.dbContext.Teachers.Remove(teacher);
+            var courses = this.dbContext.Courses.Where(c => c.TeacherId.ToString() == id);
+
+            foreach (var course in courses)
+            {
+                course.TeacherId = null;
+            }
             await this.dbContext.SaveChangesAsync();
             await this.userService.RemoveUserAsync(id);
         }

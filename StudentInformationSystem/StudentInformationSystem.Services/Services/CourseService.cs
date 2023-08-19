@@ -50,7 +50,7 @@ namespace StudentInformationSystem.Services.Services
             List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
             {
                 Id = s.StudentId,
-                Name = s.Student.FirstName + " " + s.Student.LastName
+                Name = s.Student.User.FirstName + " " + s.Student.User.LastName
             }).ToListAsync();
             
             
@@ -174,8 +174,8 @@ namespace StudentInformationSystem.Services.Services
             return await this.dbContext.Students.Select(s => new EnrollStudentViewModel()
             {
                StudentId = s.Id,
-               FirstName = s.FirstName,
-               LastName = s.LastName,
+               FirstName = s.User.FirstName,
+               LastName = s.User.LastName,
                FacultyNumber = s.FacultyNumber,
                StudentCourse = this.dbContext.StudentCourses.FirstOrDefault(sc => sc.StudentId == s.Id && sc.CourseId == id) ?? new StudentCourses()
             }).ToArrayAsync();

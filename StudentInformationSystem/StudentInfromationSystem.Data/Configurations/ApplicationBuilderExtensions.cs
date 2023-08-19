@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInfromationSystem.Data.Configurations
 {
@@ -17,7 +18,7 @@ namespace StudentInfromationSystem.Data.Configurations
             var services = serviceScope.ServiceProvider;
 
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
             const string adminRole = "Admin";
             Task.Run(async () =>

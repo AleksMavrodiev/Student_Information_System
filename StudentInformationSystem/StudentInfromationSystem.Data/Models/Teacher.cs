@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using StudentInfromationSystem.Data.Models;
 using static StudentInformationSystem.Common.DataValidationConstants;
 
 namespace StudentInformationSystem.Data.Models
@@ -15,29 +16,11 @@ namespace StudentInformationSystem.Data.Models
 
         public Guid Id { get; set; }
 
-        [StringLength(TeacherConstants.FirstNameMaxLength, MinimumLength = TeacherConstants.FirstNameMinLength)]
-        public string FirstName { get; set; } = null!;
-
-        [StringLength(TeacherConstants.LastNameMaxLength, MinimumLength = TeacherConstants.LastNameMinLength)]
-        public string LastName { get; set; } = null!;
-
-        [StringLength(TeacherConstants.EGNMaxLength)]
-        public string EGN { get; set; } = null!;
-
-        [StringLength(TeacherConstants.EmailMaxLength, MinimumLength = TeacherConstants.EmailMinLength)]
-        public string Email { get; set; } = null!;
-
-        [StringLength(TeacherConstants.PhoneNumberMaxLength, MinimumLength = TeacherConstants.PhoneNumberMinLength)]
-
-        public string PhoneNumber { get; set; } = null!;
-
-        public byte[]? ProfilePicture { get; set; }
-
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
 
-        public virtual IdentityUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
     }

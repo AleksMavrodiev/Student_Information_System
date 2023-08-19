@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using StudentInformationSystem.Data;
 using StudentInformationSystem.Services.Contracts;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Services.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly StudentInformationDbContext dbContext;
 
-        public UserService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, StudentInformationDbContext dbContext)
+        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, StudentInformationDbContext dbContext)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -54,6 +55,11 @@ namespace StudentInformationSystem.Services.Services
             var user = await this.userManager.FindByIdAsync(id);
             await this.userManager.DeleteAsync(user);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
+        {
+            return await this.userManager.FindByIdAsync(id);
         }
     }
 }

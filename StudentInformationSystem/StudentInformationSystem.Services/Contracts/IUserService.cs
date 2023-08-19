@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Services.Contracts
 {
@@ -11,6 +12,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task AddStudentToRoleAsync(string userId);
         Task AddTeacherToRoleAsync(string userId);
         Task RemoveUserAsync(string id);
-
+        Task<ApplicationUser> GetUserByIdAsync(string id);
     }
 }

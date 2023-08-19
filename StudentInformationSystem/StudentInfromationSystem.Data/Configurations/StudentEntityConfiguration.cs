@@ -14,6 +14,11 @@ namespace StudentInformationSystem.Data.Configurations
                 .HasForeignKey(s => s.SpecialtyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .HasOne(s => s.User)
+                .WithOne(u => u.Student)
+                .HasForeignKey<Student>(s => s.UserId);
+
             builder.HasData(this.GenerateStudents());
         }
 
@@ -24,12 +29,7 @@ namespace StudentInformationSystem.Data.Configurations
                 new Student()
                 {
                     Id = Guid.Parse("47af10f2-ef33-4637-a18f-40c27c56acb7"),
-                    FirstName = "Ivan",
-                    LastName = "Ivanov",
-                    Email = "student@university.com",
-                    EGN = "1234567890",
                     UserId = "47af10f2-ef33-4637-a18f-40c27c56acb7",
-                    PhoneNumber = "0888123456",
                     SpecialtyId = 1,
                     FacultyNumber = "123456789",
                     IsForeign = false,

@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Data.Configurations;
 using StudentInformationSystem.Data.Models;
 using StudentInfromationSystem.Data.Configurations;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Data
 {
-    public class StudentInformationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class StudentInformationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public StudentInformationDbContext(DbContextOptions<StudentInformationDbContext> options)
             : base(options)

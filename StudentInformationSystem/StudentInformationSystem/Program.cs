@@ -5,6 +5,7 @@ using StudentInformationSystem.Data;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Services.Services;
 using StudentInfromationSystem.Data.Configurations;
+using StudentInfromationSystem.Data.Models;
 
 internal class Program
 {
@@ -20,7 +21,7 @@ internal class Program
         });
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+        builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;

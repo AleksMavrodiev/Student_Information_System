@@ -11,6 +11,7 @@ using StudentInformationSystem.Data;
 using StudentInformationSystem.Data.Models;
 using StudentInformationSystem.Services.Contracts;
 using StudentInformationSystem.Web.ViewModels.Student;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Services.Services
 {
@@ -18,11 +19,13 @@ namespace StudentInformationSystem.Services.Services
     {
         private readonly StudentInformationDbContext dbcontext;
         private readonly IUserService userService;
+        private readonly ISpecialtyService specialtyService;
 
-        public StudentService(StudentInformationDbContext dbContext, IUserService userService)
+        public StudentService(StudentInformationDbContext dbContext, IUserService userService, ISpecialtyService specialtyService)
         {
             this.dbcontext = dbContext;
             this.userService = userService;
+            this.specialtyService = specialtyService;
         }
 
 
@@ -31,8 +34,8 @@ namespace StudentInformationSystem.Services.Services
             return await this.dbcontext.Students.Select(x => new StudentAllViewModel
             {
                 Id = x.Id.ToString(),
-                FirstName = x.FirstName,
-                LastName = x.LastName,
+                FirstName = x.User.FirstName,
+                LastName = x.User.LastName,
                 FacultyNumber = x.FacultyNumber
             }).ToArrayAsync();
         }
@@ -44,32 +47,33 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task CreateStudentAsync(StudentAddViewModel model)
         {
-            var passwordHasher = new PasswordHasher<IdentityUser>();
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
             string initialPassword = "123456";
 
             var student = new Student
             {
                 Id = Guid.NewGuid(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                EGN = model.EGN,
-                Email = model.Email,
                 FacultyNumber = model.FacultyNumber,
-                PhoneNumber = model.PhoneNumber,
-                ProfilePicture = model.ProfilePicture,
                 IsActive = model.IsActive,
                 IsForeign = model.IsForeign,
-                SpecialtyId = model.SpecialtyId
+                SpecialtyId = model.SpecialtyId,
             };
 
-            student.User = new IdentityUser()
+
+            student.User = new ApplicationUser()
             {
                 Id = student.Id.ToString(),
                 UserName = model.Email,
                 Email = model.Email,
                 NormalizedUserName = model.Email.ToUpper(),
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                EGN = model.EGN,
+                PhoneNumber = model.PhoneNumber,
+                ProfilePicture = model.ProfilePicture,
             };
 
+            student.UserId = student.User.Id;
             student.User.PasswordHash = passwordHasher.HashPassword(student.User, initialPassword);
 
             await this.dbcontext.Students.AddAsync(student);
@@ -80,7 +84,7 @@ namespace StudentInformationSystem.Services.Services
         {
             var student = await this.GetStudentAsync(userId);
 
-            student.ProfilePicture = null;
+            student.User.ProfilePicture = null;
 
             await dbcontext.SaveChangesAsync();
         }
@@ -92,7 +96,7 @@ namespace StudentInformationSystem.Services.Services
             using (var memoryStream = new MemoryStream())
             {
                 await profilePicture.CopyToAsync(memoryStream);
-                student.ProfilePicture = memoryStream.ToArray();
+                student.User.ProfilePicture = memoryStream.ToArray();
             }
 
             await this.dbcontext.SaveChangesAsync();
@@ -109,25 +113,25 @@ namespace StudentInformationSystem.Services.Services
 
             return new StudentProfileViewModel()
             {
-                FirstName = student.FirstName,
-                LastName = student.LastName,
+                FirstName = student.User.FirstName,
+                LastName = student.User.LastName,
                 FacultyNumber = student.FacultyNumber,
-                PhoneNumber = student.PhoneNumber,
-                Email = student.Email,
-                EGN = student.EGN,
-                ProfilePicture = student.ProfilePicture
+                PhoneNumber = student.User.PhoneNumber,
+                Email = student.User.Email,
+                EGN = student.User.EGN,
+                ProfilePicture = student.User.ProfilePicture
             };
         }
 
         public async Task UpdateStudentAsync(string id, StudentEditViewModel student)
         {
             var studentToUpdate = await this.GetStudentAsync(id);
-            studentToUpdate.FirstName = student.FirstName;
-            studentToUpdate.LastName = student.LastName;
+            studentToUpdate.User.FirstName = student.FirstName;
+            studentToUpdate.User.LastName = student.LastName;
             studentToUpdate.FacultyNumber = student.FacultyNumber;
-            studentToUpdate.PhoneNumber = student.PhoneNumber;
-            studentToUpdate.Email = student.Email;
-            studentToUpdate.EGN = student.EGN;
+            studentToUpdate.User.PhoneNumber = student.PhoneNumber;
+            studentToUpdate.User.Email = student.Email;
+            studentToUpdate.User.EGN = student.EGN;
             studentToUpdate.IsActive = student.IsActive;
             studentToUpdate.IsForeign = student.IsForeign;
             studentToUpdate.SpecialtyId = student.SpecialtyId;
@@ -145,14 +149,17 @@ namespace StudentInformationSystem.Services.Services
         public async Task<StudentEditViewModel> GetStudentEditAsync(string id)
         {
             var student = await this.GetStudentAsync(id);
+            var specialties = await this.specialtyService.GetSpecialtiesForListItemAsync();
+
             var studentToEdit = new StudentEditViewModel()
             {
-                FirstName = student.FirstName,
-                LastName = student.LastName,
+                FirstName = student.User.FirstName,
+                LastName = student.User.LastName,
                 FacultyNumber = student.FacultyNumber,
-                PhoneNumber = student.PhoneNumber,
-                Email = student.Email,
-                EGN = student.EGN,
+                PhoneNumber = student.User.PhoneNumber,
+                Email = student.User.Email,
+                EGN = student.User.EGN,
+                Specialties = specialties
             };
 
             return studentToEdit;

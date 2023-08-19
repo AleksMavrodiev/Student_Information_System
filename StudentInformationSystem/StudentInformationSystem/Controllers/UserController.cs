@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentInformationSystem.Services.Contracts;
+using StudentInfromationSystem.Data.Models;
 
 namespace StudentInformationSystem.Controllers
 {
@@ -9,9 +10,9 @@ namespace StudentInformationSystem.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserController(IUserService userService, UserManager<IdentityUser> userManager)
+        public UserController(IUserService userService, UserManager<ApplicationUser> userManager)
         {
             this.userService = userService;
             this.userManager = userManager;

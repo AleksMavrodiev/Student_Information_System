@@ -35,8 +35,8 @@ namespace StudentInformationSystem.Data.Models
 
         [Required]
         [ForeignKey(nameof(Teacher))]
-        public Guid TeacherId { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public Guid? TeacherId { get; set; }
+        public virtual Teacher? Teacher { get; set; }
 
         [Required]
         [ForeignKey(nameof(Specialty))]

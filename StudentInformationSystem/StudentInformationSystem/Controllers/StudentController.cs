@@ -99,12 +99,19 @@ namespace StudentInformationSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.Specialties = await this.specialtyService.GetSpecialtiesForListItemAsync();
                 return this.View(model);
             }
 
             await this.studentService.UpdateStudentAsync(id, model);
 
             return this.RedirectToAction("All");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.studentService.DeleteStudentAsync(id);
+            return RedirectToAction("All");
         }
     }
 }

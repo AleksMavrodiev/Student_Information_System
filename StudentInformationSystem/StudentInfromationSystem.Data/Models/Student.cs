@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using StudentInfromationSystem.Data.Models;
 using static StudentInformationSystem.Common.DataValidationConstants;
 
 namespace StudentInformationSystem.Data.Models
@@ -17,30 +18,8 @@ namespace StudentInformationSystem.Data.Models
         public Guid Id { get; set; }
 
         [Required]
-        [StringLength(StudentConstants.FirstNameMaxLength, MinimumLength = StudentConstants.FirstNameMinLength)]
-        public string FirstName { get; set; } = null!;
-
-        [Required]
-        [StringLength(StudentConstants.LastNameMaxLength, MinimumLength = StudentConstants.LastNameMinLength)]
-        public string LastName { get; set; } = null!;
-
-        [Required]
-        [StringLength(StudentConstants.EGNMaxLength)]
-        public string EGN { get; set; } = null!;
-
-        [Required]
-        [StringLength(StudentConstants.EmailMaxLength, MinimumLength = StudentConstants.EmailMinLength)]
-        public string Email { get; set; } = null!;
-
-        [Required]
         [StringLength(StudentConstants.FacultyNumberMaxLength, MinimumLength = StudentConstants.FacultyNumberMinLength)]
         public string FacultyNumber { get; set; }
-
-        [Required]
-        [StringLength(StudentConstants.PhoneNumberMaxLength, MinimumLength = StudentConstants.PhoneNumberMinLength)]
-        public string PhoneNumber { get; set; } = null!;
-
-        public byte[]? ProfilePicture { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
@@ -52,7 +31,7 @@ namespace StudentInformationSystem.Data.Models
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 
-        public virtual IdentityUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         [ForeignKey(nameof(Specialty))]
