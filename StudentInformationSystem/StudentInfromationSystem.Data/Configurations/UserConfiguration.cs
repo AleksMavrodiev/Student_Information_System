@@ -34,6 +34,20 @@ namespace StudentInformationSystem.Data.Configurations
                 NormalizedEmail = "student@university.com"
             };
 
+
+            const string password = "admin";
+            const string email = "admin@mail.com";
+
+            IdentityUser adminUser = new IdentityUser()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = email,
+                NormalizedUserName = email,
+                Email = email,
+                NormalizedEmail = email
+            };
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, password);
+
             studentUser.PasswordHash = hasher.HashPassword(studentUser, "1234");
 
             teacherUser.PasswordHash = hasher.HashPassword(teacherUser, "1234");
@@ -41,7 +55,8 @@ namespace StudentInformationSystem.Data.Configurations
             return new IdentityUser[]
             {
                 teacherUser,
-                studentUser
+                studentUser,
+                adminUser
             };
 
         }

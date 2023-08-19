@@ -58,6 +58,7 @@ internal class Program
             app.UseHsts();
         }
 
+        app.SeedAdmin();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
