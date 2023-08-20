@@ -40,7 +40,11 @@ git clone https://github.com/your-username/student-information-system.git
 Update-Database
 ```
 4. Start Application with ctr+f5
-5. Enjoy
+5. The app has a seeded admin user you can use him
+   Credentials:
+    email: admin@mail.com
+    pass:  admin  
+6. Enjoy
 
 
 ##Technologies used
