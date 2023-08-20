@@ -35,7 +35,7 @@ namespace StudentInformationSystem.Data.Models
 
         [Required]
         [ForeignKey(nameof(Specialty))]
-        public int SpecialtyId { get; set; }
+        public int? SpecialtyId { get; set; }
 
         public virtual Specialty Specialty { get; set; } = null!;
 

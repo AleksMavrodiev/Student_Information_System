@@ -21,6 +21,7 @@
             <th>Lecture Room</th>
             <th>Start</th>
             <th>End</th>
+            <th>Grade</th>
             <th>Details</th>
             @if(User.IsInRole("Admin"))
             {
@@ -37,6 +38,7 @@
                 <td>@course.LectureRoom</td>
                 <td>@course.Start</td>
                 <td>@course.End</td>
+                <td>@course.Grade</td>
                 <td>
                     <a class="btn btn-primary" asp-area="" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Details</a>
                 </td>

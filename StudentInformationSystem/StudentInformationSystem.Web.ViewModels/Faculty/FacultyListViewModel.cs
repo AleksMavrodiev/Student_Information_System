@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentInformationSystem.Web.ViewModels.Speacialty
+namespace StudentInformationSystem.Web.ViewModels.Faculty
 {
-    public class SpecialtyListViewModel
+    public class FacultyListViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-
     }
 }

@@ -47,6 +47,8 @@ internal class Program
         builder.Services.AddScoped<IStudentService, StudentService>(); ;
         builder.Services.AddScoped<IUserService, UserService>();
 
+        //For Demonstation Purposes
+        //Security RIsk
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", builder =>

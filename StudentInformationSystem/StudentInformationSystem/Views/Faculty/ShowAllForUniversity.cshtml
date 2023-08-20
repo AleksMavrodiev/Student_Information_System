@@ -40,13 +40,16 @@
                         <div class="carousel-caption">
                             <h3>@Model[i].Name</h3>
                             <p>@Model[i].Description</p>
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <div class="btn-group">
-                                    <a asp-controller="Faculty" asp-action="Edit" asp-route-id="@Model[i].Id" class="btn btn-primary">Edit</a>
+                            <div class="btn-group">
+                                <a asp-controller="Specialty" asp-action="All" asp-route-id="@Model[i].Id" class="btn btn-primary">Specialties</a>
+                            
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="Faculty" asp-action="Edit" asp-route-id="@Model[i].Id" class="btn btn-warning">Edit</a>
                                     <a asp-controller="Faculty" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">Delete</a>
-                                </div>
-                            }
+                                    
+                                }
+                            </div>
                         </div>
                     </div>
                 }

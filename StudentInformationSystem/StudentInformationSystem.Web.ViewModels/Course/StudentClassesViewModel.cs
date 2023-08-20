@@ -13,5 +13,6 @@ namespace StudentInformationSystem.Web.ViewModels.Course
         public int LectureRoom { get; set; }
         public TimeOnly Start { get; set; }
         public TimeOnly End { get; set; }
+        public double? Grade { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace StudentInformationSystem.Services.Contracts
         Task<EditFacultyViewModel> PrepareForEditFaculty(int id);
         Task EditFaculty(int id, EditFacultyViewModel model);
         Task DeleteFaculty(int id);
+        Task<bool> Exists(int id);
+        Task<IEnumerable<FacultyListViewModel>> FacultiesForDropDown();
     }
 }

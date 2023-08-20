@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Web.ViewModels.Speacialty
 {
-    public class SpecialtyListViewModel
+    public class SpecialtyAllViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-
     }
 }

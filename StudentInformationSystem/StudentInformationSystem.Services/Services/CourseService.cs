@@ -25,7 +25,8 @@ namespace StudentInformationSystem.Services.Services
                     Name = c.Course.Name,
                     LectureRoom = c.Course.LectureRoom,
                     Start = c.Course.Start,
-                    End = c.Course.End
+                    End = c.Course.End,
+                    Grade = c.Grade
                 }).ToArrayAsync();
 
             return studentClasses;
@@ -39,7 +40,7 @@ namespace StudentInformationSystem.Services.Services
                     DayOfWeek = c.Course.DayOfWeek,
                     Start = c.Course.Start,
                     End = c.Course.End,
-                    LectureRoom = c.Course.LectureRoom
+                    LectureRoom = c.Course.LectureRoom,
                 }).ToArrayAsync();
         }
 

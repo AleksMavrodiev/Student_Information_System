@@ -11,5 +11,15 @@ namespace StudentInformationSystem.Services.Contracts
     public interface ISpecialtyService
     {
         public Task<IEnumerable<SpecialtyListViewModel>> GetSpecialtiesForListItemAsync();
+
+        public Task<SpecialtyDetailsViewModel> GetSpecialtyDetailsAsync(int specialtyId);
+        public Task AddSpecialtyAsync(SpecialtyAddViewModel model);
+        public Task<SpecialtyEditViewModel> GetSpecialtyForEditAsync(int specialtyId);
+        public Task EditSpecialtyAsync(int id, SpecialtyEditViewModel model);
+        public Task DeleteSpecialtyAsync(int specialtyId);
+        public Task RemoveStudentFromSpecialtyAsync(string studentId);
+        public Task<bool> ExistsAsync(int specialtyId);
+        public Task AddStudentToSpecialtyAsync(string studentId, int specialtyId);
+        public Task<IEnumerable<SpecialtyAllViewModel>> GetSpecialtiesForFacultyAsync(int facultyId);
     }
 }

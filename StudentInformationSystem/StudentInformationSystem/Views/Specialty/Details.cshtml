@@ -1,0 +1,27 @@
+﻿@model SpecialtyDetailsViewModel
+
+@{
+    ViewData["Title"] = "Specialty Details";
+}
+
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">@Model.Name</h2>
+            <p class="card-text">Students Count: @Model.StudentCount</p>
+            <p class="card-text">Courses Count: @Model.CourseCount</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>List of Courses</h3>
+        <ul class="list-group">
+            @foreach (var course in Model.Courses)
+            {
+                <li class="list-group-item">@course.Name</li>
+            }
+        </ul>
+    </div>
+</div>

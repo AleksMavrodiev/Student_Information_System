@@ -33,7 +33,7 @@
         </div>
 
         <div id="students" class="tab-pane fade">
-            @if (User.IsInRole("Student") || User.IsInRole("Admin"))
+            @if (User.IsInRole("Student"))
             {
                 <h3>Student List</h3>
                 <div class="form-group">

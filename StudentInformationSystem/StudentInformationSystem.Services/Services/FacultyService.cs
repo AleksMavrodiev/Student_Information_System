@@ -82,5 +82,19 @@ namespace StudentInformationSystem.Services.Services
             this.dbContext.Faculties.Remove(faculty);
             await this.dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await this.dbContext.Faculties.AnyAsync(f => f.Id == id);
+        }
+
+        public async Task<IEnumerable<FacultyListViewModel>> FacultiesForDropDown()
+        {
+            return await this.dbContext.Faculties.Select(f => new FacultyListViewModel()
+            {
+                Id = f.Id,
+                Name = f.Name
+            }).ToArrayAsync();
+        }
     }
 }
