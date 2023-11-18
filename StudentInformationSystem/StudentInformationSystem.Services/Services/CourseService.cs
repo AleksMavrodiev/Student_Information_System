@@ -46,7 +46,7 @@ namespace StudentInformationSystem.Services.Services
 
         public async Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId)
         {
-            StudentCourses sc = await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc => sc.CourseId == courseId);
+            var sc = await this.dbContext.Courses.FirstOrDefaultAsync(sc => sc.Id == courseId);
 
             List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
             {
@@ -57,9 +57,9 @@ namespace StudentInformationSystem.Services.Services
             
             CourseDetailsViewModel courseDetails = new CourseDetailsViewModel()
             {
-                Id = sc.CourseId,
-                Name = sc.Course.Name,
-                Description = sc.Course.Description,
+                Id = sc.Id,
+                Name = sc.Name,
+                Description = sc.Description,
                 Students = studentNames
             };
 
