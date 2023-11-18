@@ -184,5 +184,12 @@ namespace StudentInformationSystem.Services.Services
 
             return studentToEdit;
         }
+
+        public async Task<string> GetStudentIdByEmail(string email)
+        {
+            var student = await this.dbcontext.Students.FirstOrDefaultAsync(s => s.User.Email == email);
+
+            return student.User.Id.ToString();
+        }
     }
 }

@@ -20,5 +20,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task UpdateStudentAsync(string id, StudentEditViewModel student);
         Task DeleteStudentAsync(string id);
         Task<StudentEditViewModel> GetStudentEditAsync(string id);
+        Task<string> GetStudentIdByEmail(string email);
     }
 }

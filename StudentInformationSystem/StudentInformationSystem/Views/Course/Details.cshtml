@@ -9,6 +9,7 @@
 <head>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/CourseDetails.css">
 </head>
 <body>
 <div class="container mt-4">
@@ -74,6 +75,10 @@
             }
         </div>
     </div>
+</div>
+
+    <div class="centered-button btn btn-primary">
+        <a asp-area="" asp-controller="Course" asp-action="AddStudentsToCourse" asp-route-id="@Model.Id" class="centered-button btn btn-primary btn-sm">Add Student</a>
 </div>
 
 <script>

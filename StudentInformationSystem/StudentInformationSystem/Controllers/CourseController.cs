@@ -145,10 +145,12 @@ namespace StudentInformationSystem.Controllers
             return View(students);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
-        public async Task<IActionResult> AddStudentsToCourse(int courseId, string studentId)
+        public async Task<IActionResult> AddStudentsToCourse(int courseId, string studentEmail)
         {
+            var studentId = await this.studentService.GetStudentIdByEmail(studentEmail);
+
             try
             {
                 await this.courseService.EnrollStudentAsync(courseId, studentId);
@@ -169,6 +171,12 @@ namespace StudentInformationSystem.Controllers
             await this.courseService.UnenrollStudentAsync(courseId, studentId);
 
             return RedirectToAction("Details", new { id = courseId });
+        }
+
+        public async Task<IActionResult> AddStudentsToCourse(int id)
+        {
+            ViewData["CourseId"] = id;
+            return View();
         }
     }
 }

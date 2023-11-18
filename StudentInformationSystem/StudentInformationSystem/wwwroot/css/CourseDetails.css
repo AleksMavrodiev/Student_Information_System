@@ -1,0 +1,24 @@
+﻿/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    /* Additional styling for your main content */
+}
+
+.centered-button {
+    text-align: center;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
