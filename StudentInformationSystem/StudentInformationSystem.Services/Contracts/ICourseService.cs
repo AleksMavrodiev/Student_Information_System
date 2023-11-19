@@ -22,5 +22,6 @@ namespace StudentInformationSystem.Services.Contracts
         Task UnenrollStudentAsync(int courseId, string studentId);
         Task<IEnumerable<EnrollStudentViewModel>> FetchStudentsForCourseAsync(int id);
         Task<IEnumerable<CourseScheduleViewModel>> GetTeacherScheduleAsync(string teacherId);
+        Task ResetGrade(int courseId, string studentId);
     }
 }

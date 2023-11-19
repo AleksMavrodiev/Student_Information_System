@@ -39,5 +39,11 @@ namespace StudentInformationSystem.Data
             builder.ApplyConfiguration(new StudentCourseEntityConfigurations());
             base.OnModelCreating(builder);
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }

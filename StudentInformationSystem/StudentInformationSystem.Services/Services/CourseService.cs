@@ -48,10 +48,12 @@ namespace StudentInformationSystem.Services.Services
         {
             var sc = await this.dbContext.Courses.FirstOrDefaultAsync(sc => sc.Id == courseId);
 
+
             List<StudentCourseDetailsViewModel> studentNames = await this.dbContext.StudentCourses.Where(sc => sc.CourseId == courseId).Select(s => new StudentCourseDetailsViewModel()
             {
                 Id = s.StudentId,
-                Name = s.Student.User.FirstName + " " + s.Student.User.LastName
+                Name = s.Student.User.FirstName + " " + s.Student.User.LastName,
+                StudentCourse = this.dbContext.StudentCourses.FirstOrDefault(sc => sc.CourseId == courseId && sc.StudentId == s.StudentId)
             }).ToListAsync();
             
             
@@ -193,6 +195,14 @@ namespace StudentInformationSystem.Services.Services
                 End = c.End,
                 LectureRoom = c.LectureRoom
             }).ToArrayAsync();
+        }
+
+        public async Task ResetGrade(int courseId, string studentId)
+        {
+            var grade = await this.dbContext.StudentCourses.FirstOrDefaultAsync(sc => sc.CourseId == courseId && sc.StudentId == Guid.Parse(studentId));
+
+            grade.Grade = 0;
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

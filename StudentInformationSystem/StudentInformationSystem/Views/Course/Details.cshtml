@@ -31,20 +31,6 @@
         </div>
 
         <div id="students" class="tab-pane fade">
-            @if (User.IsInRole("Student"))
-            {
-                <h3>Student List</h3>
-                <div class="form-group">
-                    <input type="text" id="studentSearch" class="form-control" placeholder="Search for students" />
-                </div>
-                <ul id="studentList">
-                    @foreach (var student in Model.Students)
-                    {
-                        <li data-student-id="@student.Id">@student.Name</li>
-                    }
-                </ul>
-            }
-
             @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
             {
                 <h3>Grading</h3>
@@ -61,12 +47,34 @@
                         <tr class="student-row" data-student-id="@student.Id">
                             <td>@student.Name</td>
                             <td>
-                                <form asp-controller="Teacher" asp-action="Grade" method="post">
-                                    <input name="grade" runat="server" type="number" min="2" max="6" step="1" />
-                                    <input name="studentId" runat="server" type="hidden" value="@student.Id" />
-                                    <input name="courseid" runat="server" type="hidden" value="@Model.Id" />
-                                    <button type="submit">Save</button>
-                                </form>
+                                @if (student.StudentCourse.Grade != 0)
+                                {
+                                    <div class="container mt-5">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title">Grade</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Your Grade: <strong>@student.StudentCourse.Grade</strong></p>
+                                                <form id="editForm" asp-controller="Course" asp-action="EditGrade" method="post">
+                                                    <input type="hidden" id="studentId" name="studentId" value="@student.Id" />
+                                                    <input type="hidden" id="courseId" name="courseId" value="@student.StudentCourse.CourseId"/>
+                                                    <button type="submit">Edit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (student.StudentCourse.Grade == 0)
+                                {
+                                    <form asp-controller="Teacher" asp-action="Grade" method="post">
+                                        <input name="grade" runat="server" type="number" min="2" max="6" step="1" />
+                                        <input name="studentId" runat="server" type="hidden" value="@student.Id" />
+                                        <input name="courseid" runat="server" type="hidden" value="@Model.Id" />
+                                        <button type="submit">Save</button>
+                                    </form>
+                                }
+
                             </td>
                         </tr>
                     }

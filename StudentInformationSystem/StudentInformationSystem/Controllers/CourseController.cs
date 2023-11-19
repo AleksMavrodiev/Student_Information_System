@@ -178,5 +178,11 @@ namespace StudentInformationSystem.Controllers
             ViewData["CourseId"] = id;
             return View();
         }
+
+        public async Task<IActionResult> EditGrade(int courseId, string studentId)
+        {
+            await this.courseService.ResetGrade(courseId, studentId);
+            return RedirectToAction("Details", new { id = courseId });
+        }
     }
 }
