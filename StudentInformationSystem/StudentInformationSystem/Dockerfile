@@ -1,3 +1,5 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -12,7 +14,7 @@ COPY ["StudentInformationSystem.Web.ViewModels/StudentInformationSystem.Web.View
 COPY ["StudentInformationSystem.Common/StudentInformationSystem.Common.csproj", "StudentInformationSystem.Common/"]
 COPY ["StudentInfromationSystem.Data/StudentInfromationSystem.Data.csproj", "StudentInfromationSystem.Data/"]
 COPY ["StudentInfromationSystem.Web.Infrastructure/StudentInfromationSystem.Web.Infrastructure.csproj", "StudentInfromationSystem.Web.Infrastructure/"]
-RUN dotnet restore "./StudentInformationSystem/StudentInformationSystem.csproj"
+RUN dotnet restore "./StudentInformationSystem/./StudentInformationSystem.csproj"
 COPY . .
 WORKDIR "/src/StudentInformationSystem"
 RUN dotnet build "./StudentInformationSystem.csproj" -c $BUILD_CONFIGURATION -o /app/build
