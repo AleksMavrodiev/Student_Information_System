@@ -14,7 +14,7 @@ namespace StudentInformationSystem.Services.Services
     {
         public async Task SendEmailAsync(string email, string subject, string message, string username)
         {
-            var apiKey = "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";
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("martineli.aleksandyr@gmail.com", "Example User");
             var to = new EmailAddress(email, username);
