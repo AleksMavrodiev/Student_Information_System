@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to Web App StudentInformationSystem20240306162420
+name: Build and deploy .NET Core application to Web App StudentInformationSystem20240306163947
 on:
   push:
     branches:
     - master
 env:
-  AZURE_WEBAPP_NAME: StudentInformationSystem20240306162420
+  AZURE_WEBAPP_NAME: StudentInformationSystem20240306163947
   AZURE_WEBAPP_PACKAGE_PATH: StudentInformationSystem\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.StudentInformationSystem20240306162420_33DA }}
+        publish-profile: ${{ secrets.StudentInformationSystem20240306163947_CCC1 }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
