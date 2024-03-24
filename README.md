@@ -2,7 +2,7 @@
 
 
 
-This is my project for the Software University. The Student Information System is a web application designed to manage student and course information within a university setting. It provides features for administrators to add and manage universities, faculties, courses, teachers, and students. The system is built using ASP.NET Core and utilizes a relational database for data storage. To access the app follow the link: studentinformationsystem20240306163947.azurewebsites.net
+This is my project for the Software University. The Student Information System is a web application designed to manage student and course information within a university setting. It provides features for administrators to add and manage universities, faculties, courses, teachers, and students. The system is built using ASP.NET Core and utilizes a relational database for data storage.
 
 To login use the following username and password:
 Username: admin@mail.com
